@@ -80,13 +80,16 @@ public class ImageMetadata {
     }
 
     public ImageMetadataResponse toResponse(){
-        return new ImageMetadataResponse(
-                this.title,
-                this.description,
-                this.location,
-                this.imagePath,
-                this.createdAt,
-                this.modifiedAt
-        );
+        return ImageMetadataResponse.builder()
+                .title(title)
+                .description(description)
+                .location(location)
+                .imagePath(imagePath)
+                .shape(shape)
+                .proficiency(proficiency)
+                .shared(shared)
+                .createdAt(createdAt)
+                .modifiedAt(modifiedAt)
+                .build();
     }
 }
