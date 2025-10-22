@@ -58,7 +58,7 @@ public class WebClientConfig {
         return webClientBuilder.baseUrl(kakaoProperties.authApi())
                 .clientConnector(new ReactorClientHttpConnector(
                         HttpClient.create()
-                                // 연결 타임아웃 설정 (하드코딩된 5초)
+                                // 연결 타임아웃 설정
                                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, kakaoProperties.timeOutSeconds() * 1000)
                                 // 응답 전체 타임아웃 설정
                                 .responseTimeout(Duration.ofSeconds(kakaoProperties.timeOutSeconds()))
