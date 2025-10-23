@@ -7,7 +7,6 @@ public record AddressVerificationProperties(
         String key,
         String url,
         int connectTimeoutMillis,
-        int responseTimeoutSeconds,
-        int timeOutSeconds
+        int responseTimeoutSeconds
 ) {
 }

@@ -70,4 +70,3 @@ address-verification:
   key: ${ADDRESS_VERIFICATION_KEY}
   connect-timeout-millis: 5000
   response-timeout-seconds: 5
-  time-out-seconds: 5
