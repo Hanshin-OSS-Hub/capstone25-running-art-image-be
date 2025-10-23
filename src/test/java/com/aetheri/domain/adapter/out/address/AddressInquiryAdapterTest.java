@@ -25,7 +25,10 @@ class AddressInquiryAdapterTest {
 
         // then
         StepVerifier.create(mono)
-                .expectNextCount(1) // 1개의 데이터가 올 것을 기대
+                .expectNextMatches(response -> {
+                    // API 응답 구조 검증
+                    return response != null && response.results() != null;
+                })
                 .verifyComplete();  // 스트림이 성공적으로 완료되는지 검증 (이때까지 테스트가 대기함)
     }
 
