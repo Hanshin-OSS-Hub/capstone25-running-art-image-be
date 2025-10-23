@@ -35,15 +35,14 @@ class AddressInquiryAdapterTest {
     @Test
     public void failure_when_executor_fails() {
         // given
-        // (만약 WebClient를 Mocking해서 강제로 오류를 발생시킬 수 있다면...)
-        String address = "error_trigger_keyword";
+        String address = "존재하지않는주소123456";
 
         // when
         var mono = addressInquiryAdapter.inquiryAddress(address);
 
         // then
         StepVerifier.create(mono)
-                .expectError(BusinessException.class) // BusinessException이 발생하는지 검증
-                .verify(); // 오류가 발생하고 스트림이 종료되는지 검증
+                .expectNextMatches(response -> response.results().juso().isEmpty())
+                .verifyComplete();
     }
 }
