@@ -1,5 +1,6 @@
 package com.aetheri.infrastructure.config;
 
+import com.aetheri.infrastructure.config.properties.AddressVerificationProperties;
 import com.aetheri.infrastructure.config.properties.KakaoProperties;
 import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;
@@ -24,6 +25,7 @@ import java.time.Duration;
 @RequiredArgsConstructor
 public class WebClientConfig {
     private final KakaoProperties kakaoProperties;
+    private final AddressVerificationProperties addressVerificationProperties;
 
     /**
      * 카카오의 **일반 API (사용자 정보, 로그아웃, 연결 해제 등)**와 통신하기 위한 {@code WebClient} 빈을 생성합니다.
@@ -91,5 +93,15 @@ public class WebClientConfig {
                                 .addHandlerLast(new ReadTimeoutHandler(responseTimeoutSeconds))
                                 .addHandlerLast(new WriteTimeoutHandler(responseTimeoutSeconds)))
         );
+    }
+
+    @Bean
+    public WebClient addressWebClient(WebClient.Builder webClientBuilder) {
+        return webClientBuilder.baseUrl(addressVerificationProperties.url())
+                .clientConnector(commonConnector(
+                        addressVerificationProperties.connectTimeoutMillis(),
+                        addressVerificationProperties.responseTimeoutSeconds())
+                )
+                .build();
     }
 }
