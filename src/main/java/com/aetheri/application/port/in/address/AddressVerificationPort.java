@@ -1,4 +1,4 @@
-package com.aetheri.application.port.out.address;
+package com.aetheri.application.port.in.address;
 import reactor.core.publisher.Mono;
 
 /**
