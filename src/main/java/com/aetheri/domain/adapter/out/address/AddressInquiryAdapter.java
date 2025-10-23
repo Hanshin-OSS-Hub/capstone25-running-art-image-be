@@ -3,16 +3,21 @@ package com.aetheri.domain.adapter.out.address;
 import com.aetheri.application.dto.address.request.AddressSearchRequest;
 import com.aetheri.application.dto.address.response.AddressApiResponse;
 import com.aetheri.application.port.out.address.AddressInquiryPort;
+import com.aetheri.domain.exception.BusinessException;
 import com.aetheri.infrastructure.config.properties.AddressVerificationProperties;
+import com.aetheri.infrastructure.handler.WebClientErrorHandler;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientRequestException;
 import reactor.core.publisher.Mono;
 
 /**
  * 도로명 주소 API (juso.go.kr)를 호출하여
  * AddressInquiryPort를 구현하는 아웃바운드 어댑터입니다.
  */
+@Slf4j
 @Component
 public class AddressInquiryAdapter implements AddressInquiryPort {
 
@@ -41,7 +46,6 @@ public class AddressInquiryAdapter implements AddressInquiryPort {
                         .queryParam("resultType", request.resultType())
                         .build()
                 )
-                .retrieve()
-                .bodyToMono(AddressApiResponse.class);
+                .exchangeToMono(WebClientErrorHandler.handleErrors(AddressApiResponse.class));
     }
 }
