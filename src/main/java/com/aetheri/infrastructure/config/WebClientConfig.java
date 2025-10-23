@@ -28,7 +28,7 @@ public class WebClientConfig {
     private final AddressVerificationProperties addressVerificationProperties;
 
     /**
-     * 카카오의 **일반 API (사용자 정보, 로그아웃, 연결 해제 등)**와 통신하기 위한 {@code WebClient} 빈을 생성합니다.
+     * 카카오의 일반 API (사용자 정보, 로그아웃, 연결 해제 등)와 통신하기 위한 {@code WebClient} 빈을 생성합니다.
      *
      * <p>{@code kakaoProperties}에 설정된 {@code api} 기본 URL과 타임아웃 설정을 사용합니다.</p>
      *
@@ -47,7 +47,7 @@ public class WebClientConfig {
     }
 
     /**
-     * 카카오의 **인증 API (토큰 발급, 갱신 등)**와 통신하기 위한 {@code WebClient} 빈을 생성합니다.
+     * 카카오의 인증 API (토큰 발급, 갱신 등)와 통신하기 위한 {@code WebClient} 빈을 생성합니다.
      *
      * <p>{@code kakaoProperties}에 설정된 {@code authApi} 기본 URL과 전용 타임아웃 설정을 사용합니다.</p>
      *
@@ -73,7 +73,25 @@ public class WebClientConfig {
     }
 
     /**
-     * **공통적으로 사용되는 {@code WebClient} 커넥터 설정**을 생성합니다.
+     * 주소 검증 서비스와 통신하기 위한 {@code WebClient} 빈을 생성합니다.
+     *
+     * <p>{@code addressVerificationProperties}에 설정된 {@code url} 기본 URL과 타임아웃 설정을 사용합니다.</p>
+     *
+     * @param webClientBuilder Spring에서 자동 주입된 {@code WebClient.Builder}입니다.
+     * @return 주소 검증 API URL이 설정된 {@code WebClient} 인스턴스입니다.
+     */
+    @Bean
+    public WebClient addressWebClient(WebClient.Builder webClientBuilder) {
+        return webClientBuilder.baseUrl(addressVerificationProperties.url())
+                .clientConnector(commonConnector(
+                        addressVerificationProperties.connectTimeoutMillis(),
+                        addressVerificationProperties.responseTimeoutSeconds())
+                )
+                .build();
+    }
+
+    /**
+     * 공통적으로 사용되는 {@code WebClient} 커넥터 설정을 생성합니다.
      *
      * <p>{@code HttpClient}를 사용하여 연결 타임아웃, 응답 타임아웃, Netty의 Read/Write 타임아웃을 설정합니다.</p>
      *
@@ -93,15 +111,5 @@ public class WebClientConfig {
                                 .addHandlerLast(new ReadTimeoutHandler(responseTimeoutSeconds))
                                 .addHandlerLast(new WriteTimeoutHandler(responseTimeoutSeconds)))
         );
-    }
-
-    @Bean
-    public WebClient addressWebClient(WebClient.Builder webClientBuilder) {
-        return webClientBuilder.baseUrl(addressVerificationProperties.url())
-                .clientConnector(commonConnector(
-                        addressVerificationProperties.connectTimeoutMillis(),
-                        addressVerificationProperties.responseTimeoutSeconds())
-                )
-                .build();
     }
 }
