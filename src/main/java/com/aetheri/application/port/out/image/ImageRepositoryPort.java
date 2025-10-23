@@ -8,71 +8,71 @@ import reactor.core.publisher.Mono;
 
 /**
  * 이미지 메타데이터를 데이터베이스에서 조작하기 위한 포트
- * */
+ */
 public interface ImageRepositoryPort {
     /**
- * Persists new image metadata.
- *
- * Persists the metadata described by the provided DTO and emits the generated metadata identifier.
- *
- * @param dto DTO containing the fields required to create the image metadata
- * @return a Mono that emits the generated image metadata ID when persistence completes
- */
+     * 새로운 이미지 메타데이터를 저장합니다.
+     * <p>
+     * 제공된 DTO에 설명된 메타데이터를 영속화하고 생성된 메타데이터 식별자를 방출합니다.
+     *
+     * @param runnerId 이미지 메타데이터의 소유자(러너/사용자) 식별자
+     * @param dto 이미지 메타데이터를 생성하는 데 필요한 필드를 포함하는 DTO
+     * @return 영속화가 완료될 때 생성된 이미지 메타데이터 ID를 방출하는 Mono
+     */
     Mono<Long> saveImageMetadata(Long runnerId, ImageMetadataSaveRequest dto);
 
     /**
- * Retrieves image metadata by its image identifier.
- *
- * @param imageId the unique identifier of the image whose metadata to retrieve
- * @return a Mono emitting the ImageMetadata if found, or an empty Mono if no matching record exists
- */
+     * 이미지 식별자를 통해 이미지 메타데이터를 검색합니다.
+     *
+     * @param imageId 메타데이터를 검색할 이미지의 고유 식별자
+     * @return 발견되면 ImageMetadata를 방출하고, 일치하는 레코드가 없으면 빈 Mono를 방출하는 Mono
+     */
     Mono<ImageMetadata> findById(Long imageId);
 
     /**
- * Retrieves all image metadata records associated with the given runner (user) ID.
- *
- * @param runnerId the runner (user) identifier whose image metadata should be returned
- * @return a reactive stream (Flux) of ImageMetadata for the specified runner; completes empty if none found
- */
+     * 주어진 러너(사용자) ID와 관련된 모든 이미지 메타데이터 레코드를 검색합니다.
+     *
+     * @param runnerId 이미지 메타데이터를 반환해야 하는 러너(사용자) 식별자
+     * @return 지정된 러너에 대한 ImageMetadata의 반응형 스트림(Flux); 발견되지 않으면 빈 Flux로 완료됨
+     */
     Flux<ImageMetadata> findByRunnerId(Long runnerId);
 
     /**
- * Updates image metadata for the specified runner and image.
- *
- * Applies the changes provided in the update request to the image metadata identified by imageId and owned by runnerId.
- *
- * @param runnerId the owner/runner identifier used to scope the update
- * @param imageId the identifier of the image metadata to update
- * @param request the update payload containing fields to modify
- * @return a Mono emitting the number of records updated (0 if no matching record was found)
- */
+     * 지정된 러너와 이미지에 대한 이미지 메타데이터를 업데이트합니다.
+     * <p>
+     * runnerId가 소유하고 imageId로 식별되는 이미지 메타데이터에 업데이트 요청에 제공된 변경 사항을 적용합니다.
+     *
+     * @param runnerId 업데이트 범위를 지정하는 데 사용되는 소유자/러너 식별자
+     * @param imageId 업데이트할 이미지 메타데이터의 식별자
+     * @param request 수정할 필드를 포함하는 업데이트 페이로드
+     * @return 업데이트된 레코드 수(일치하는 레코드가 발견되지 않은 경우 0)를 방출하는 Mono
+     */
     Mono<Long> updateImageMetadata(Long runnerId, Long imageId, ImageMetadataUpdateRequest request);
 
     /**
- * Checks whether image metadata exists for the given image ID.
- *
- * @param imageId the ID of the image whose metadata existence is checked
- * @return a Mono emitting {@code true} if metadata exists for the image ID, otherwise {@code false}
- */
+     * 주어진 이미지 ID에 대해 이미지 메타데이터가 존재하는지 확인합니다.
+     *
+     * @param imageId 메타데이터 존재 여부를 확인할 이미지의 ID
+     * @return 이미지 ID에 대한 메타데이터가 존재하면 {@code true}를, 그렇지 않으면 {@code false}를 방출하는 Mono
+     */
     Mono<Boolean> isExistImageMetadata(Long imageId);
 
     /**
- * Deletes image metadata identified by the given runner (owner) and image IDs.
- *
- * <p>The operation is scoped to the specified runnerId to ensure only metadata owned
- * by that runner is removed.</p>
- *
- * @param runnerId the owner/runner ID that must match the metadata's owner
- * @param imageId  the image metadata identifier to delete
- * @return a Mono emitting the result indicator (commonly the number of records deleted)
- */
+     * 주어진 러너(소유자) 및 이미지 ID로 식별되는 이미지 메타데이터를 삭제합니다.
+     *
+     * <p>이 작업은 지정된 runnerId가 소유한 메타데이터만 제거되도록 해당 러너 ID로 범위가 지정됩니다.</p>
+     *
+     * @param runnerId 메타데이터의 소유자와 일치해야 하는 소유자/러너 ID
+     * @param imageId 삭제할 이미지 메타데이터 식별자
+     * @return 결과 지표(일반적으로 삭제된 레코드 수)를 방출하는 Mono
+     */
     Mono<Long> deleteById(Long runnerId, Long imageId);
 
     /**
- * Deletes all image metadata records belonging to the specified runner.
- *
- * @param runnerId the ID of the runner whose image metadata should be deleted
- * @return a Mono emitting the number of records deleted
- */
+     * 지정된 러너에게 속한 모든 이미지 메타데이터 레코드를 삭제합니다.
+     *
+     * @param runnerId 이미지 메타데이터를 삭제해야 하는 러너의 ID
+     * @return 삭제된 레코드 수를 방출하는 Mono
+     */
     Mono<Long> deleteByRunnerId(Long runnerId);
 }

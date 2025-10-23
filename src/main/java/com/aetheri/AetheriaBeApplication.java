@@ -1,5 +1,6 @@
 package com.aetheri;
 
+import com.aetheri.infrastructure.config.properties.AddressVerificationProperties;
 import com.aetheri.infrastructure.config.properties.ImageProperties;
 import com.aetheri.infrastructure.config.properties.JWTProperties;
 import com.aetheri.infrastructure.config.properties.KakaoProperties;
@@ -19,7 +20,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @EnableConfigurationProperties({
         JWTProperties.class, // JWT 관련 설정 속성 활성화
         KakaoProperties.class, // 카카오 인증 관련 설정 속성 활성화
-        ImageProperties.class // 이미지 저장 및 조회 관련 설정 속성 활성화
+        ImageProperties.class, // 이미지 저장 및 조회 관련 설정 속성 활성화
+        AddressVerificationProperties.class // 주소 검증 API 관련 설정 속성 활성화
 })
 @SpringBootApplication
 public class AetheriaBeApplication {
