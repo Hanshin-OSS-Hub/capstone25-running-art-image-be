@@ -21,6 +21,7 @@ class AddressInquiryAdapterTest {
 
         // when
         var mono = addressInquiryAdapter.inquiryAddress(address);
+        mono.subscribe(System.out::println);
 
         // then
         StepVerifier.create(mono)
