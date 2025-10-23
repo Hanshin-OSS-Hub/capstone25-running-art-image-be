@@ -3,14 +3,12 @@ package com.aetheri.domain.adapter.out.address;
 import com.aetheri.application.dto.address.request.AddressSearchRequest;
 import com.aetheri.application.dto.address.response.AddressApiResponse;
 import com.aetheri.application.port.out.address.AddressInquiryPort;
-import com.aetheri.domain.exception.BusinessException;
 import com.aetheri.infrastructure.config.properties.AddressVerificationProperties;
 import com.aetheri.infrastructure.handler.WebClientErrorHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.reactive.function.client.WebClientRequestException;
 import reactor.core.publisher.Mono;
 
 /**
