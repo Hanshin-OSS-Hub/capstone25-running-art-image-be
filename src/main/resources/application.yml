@@ -64,3 +64,10 @@ kakao:
 
 image:
   path: ${IMAGE_PATH}
+
+address-verification:
+  url: ${ADDRESS_VERIFICATION_URL}
+  key: ${ADDRESS_VERIFICATION_KEY}
+  connect-timeout-millis: 5000
+  response-timeout-seconds: 5
+  time-out-seconds: 5
