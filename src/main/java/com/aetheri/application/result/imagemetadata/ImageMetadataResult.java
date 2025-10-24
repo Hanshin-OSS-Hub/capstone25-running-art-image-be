@@ -22,6 +22,7 @@ import java.time.LocalDate;
  */
 @Builder
 public record ImageMetadataResult(
+        Long runnerId,
         String title,
         String description,
         String location,

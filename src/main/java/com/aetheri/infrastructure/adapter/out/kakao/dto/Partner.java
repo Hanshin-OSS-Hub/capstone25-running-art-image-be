@@ -1,5 +1,6 @@
 package com.aetheri.infrastructure.adapter.out.kakao.dto;
 
+import com.aetheri.application.result.kakao.api.PartnerResult;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -16,4 +17,10 @@ public record Partner(
          */
         @JsonProperty("uuid")
         String uuid
-) {}
+) {
+        public PartnerResult toResult(){
+                return PartnerResult.builder()
+                        .uuid(uuid)
+                        .build();
+        }
+}

@@ -1,5 +1,6 @@
 package com.aetheri.infrastructure.adapter.out.kakao.dto;
 
+import com.aetheri.application.result.kakao.api.KakaoAccountResult;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -167,4 +168,33 @@ public record KakaoAccount(
          */
         @JsonProperty("ci_authenticated_at")
         Date ciCreatedAt
-) {}
+) {
+        public KakaoAccountResult toResult(){
+                return KakaoAccountResult.builder()
+                        .isProfileAgree(isProfileAgree)
+                        .isNickNameAgree(isNickNameAgree)
+                        .isProfileImageAgree(isProfileImageAgree)
+                        .profile(profile.toResult())
+                        .isNameAgree(isNameAgree)
+                        .name(name)
+                        .isEmailAgree(isEmailAgree)
+                        .isEmailValid(isEmailValid)
+                        .isEmailVerified(isEmailVerified)
+                        .email(email)
+                        .isAgeAgree(isAgeAgree)
+                        .ageRange(ageRange)
+                        .isBirthYearAgree(isBirthYearAgree)
+                        .birthYear(birthYear)
+                        .isBirthDayAgree(isBirthDayAgree)
+                        .birthDay(birthDay)
+                        .birthDayType(birthDayType)
+                        .isGenderAgree(isGenderAgree)
+                        .gender(gender)
+                        .isPhoneNumberAgree(isPhoneNumberAgree)
+                        .phoneNumber(phoneNumber)
+                        .isCIAgree(isCIAgree)
+                        .ci(ci)
+                        .ciCreatedAt(ciCreatedAt)
+                        .build();
+        }
+}

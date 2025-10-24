@@ -1,7 +1,6 @@
 package com.aetheri.application.port.out.kakao;
 
 import com.aetheri.application.result.kakao.KakaoTokenResult;
-import com.aetheri.infrastructure.adapter.out.kakao.KakaoRefreshTokenAdapter;
 import reactor.core.publisher.Mono;
 
 /**
@@ -9,7 +8,7 @@ import reactor.core.publisher.Mono;
  * 만료된 토큰을 재발급받기 위한 아웃고잉 포트(Port)입니다.
  * 이 포트는 토큰 갱신 요청을 외부 통신 구현체에 대한 추상화를 제공합니다.
  *
- * @see KakaoRefreshTokenAdapter 실제 카카오 API 호출 구현체(어댑터)의 예시입니다.
+ * @see com.aetheri.infrastructure.adapter.out.kakao.KakaoRefreshTokenAdapter 실제 카카오 API 호출 구현체(어댑터)의 예시입니다.
  */
 public interface KakaoRefreshTokenPort {
 

@@ -139,6 +139,7 @@ public class ImageMetadata {
      */
     public ImageMetadataResult toResult(){
         return ImageMetadataResult.builder()
+                .runnerId(runnerId)
                 .title(title)
                 .description(description)
                 .location(location)

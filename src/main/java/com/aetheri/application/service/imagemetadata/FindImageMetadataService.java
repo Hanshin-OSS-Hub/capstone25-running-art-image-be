@@ -5,7 +5,6 @@ import com.aetheri.application.port.in.imagemetadata.FindImageMetadataUseCase;
 import com.aetheri.application.port.out.imagemetadata.ImageMetadataRepositoryPort;
 import com.aetheri.domain.exception.BusinessException;
 import com.aetheri.domain.exception.message.ErrorMessage;
-import com.aetheri.infrastructure.persistence.entity.ImageMetadata;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -44,8 +43,8 @@ public class FindImageMetadataService implements FindImageMetadataUseCase {
                 .switchIfEmpty(Mono.error(new BusinessException(ErrorMessage.NOT_FOUND_IMAGE_METADATA, "이미지를 찾을 수 없습니다.")))
                 .flatMap(imageMetadata -> {
                     log.info("[FindImageMetadataMetadataService] 사용자 {}가 이미지 {}를 조회했습니다.", runnerId, imageId);
-                    if (imageMetadata.getShared() || imageMetadata.getRunnerId().equals(runnerId)) {
-                        return Mono.just(imageMetadata.toResult());
+                    if (imageMetadata.shared() || imageMetadata.runnerId().equals(runnerId)) {
+                        return Mono.just(imageMetadata);
                     } else {
                         return Mono.error(
                                 new BusinessException(
@@ -74,8 +73,8 @@ public class FindImageMetadataService implements FindImageMetadataUseCase {
                 .switchIfEmpty(Mono.error(new BusinessException(ErrorMessage.NOT_FOUND_IMAGE_METADATA, "이미지를 찾을 수 없습니다.")))
                 .flatMap(imageMetadata -> {
                     log.info("[FindImageMetadataMetadataService] 이미지 {}를 조회했습니다.", imageId);
-                    if (imageMetadata.getShared()) {
-                        return Mono.just(imageMetadata.toResult());
+                    if (imageMetadata.shared()) {
+                        return Mono.just(imageMetadata);
                     } else {
                         return Mono.error(
                                 new BusinessException(
@@ -95,7 +94,7 @@ public class FindImageMetadataService implements FindImageMetadataUseCase {
      */
     @Override
     public Flux<ImageMetadataResult> findImageMetadataByRunnerId(Long runnerId) {
-        return imageMetadataRepositoryPort.findByRunnerId(runnerId).map(ImageMetadata::toResult)
+        return imageMetadataRepositoryPort.findByRunnerId(runnerId)
                 .doOnComplete(() -> log.info("[FindImageMetadataMetadataService] 사용자 {}의 이미지를 조회했습니다.", runnerId));
     }
 }

@@ -1,5 +1,6 @@
 package com.aetheri.infrastructure.adapter.out.kakao.dto;
 
+import com.aetheri.application.result.kakao.api.KakaoUserInfoResult;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.extern.slf4j.Slf4j;
@@ -63,6 +64,16 @@ public record KakaoUserInfoResponseDto(
         @JsonProperty("for_partner")
         Partner partner
 ) {
-        // Partner 레코드 또는 클래스가 정의되어 있지 않으므로 임시로 빈 형태로 두거나,
-        // 만약 실제 Partner 객체가 있다면 해당 정의를 사용해야 합니다.
+        public KakaoUserInfoResult toResult() {
+                return KakaoUserInfoResult.builder()
+                        .id(id)
+                        .hasSignedUp(hasSignedUp)
+                        .connectedAt(connectedAt)
+                        .synchedAt(synchedAt)
+                        .properties(properties)
+                        .kakaoAccountResult(kakaoAccount.toResult())
+                        .partner(partner.toResult())
+                        .build();
+
+        }
 }

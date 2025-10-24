@@ -1,5 +1,6 @@
 package com.aetheri.infrastructure.adapter.out.kakao.dto;
 
+import com.aetheri.application.result.kakao.api.ProfileResult;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -43,4 +44,14 @@ public record Profile(
          */
         @JsonProperty("is_default_nickname")
         Boolean isDefaultNickName
-) {}
+) {
+        public ProfileResult toResult(){
+                return ProfileResult.builder()
+                        .nickName(nickName)
+                        .thumbnailImageUrl(thumbnailImageUrl)
+                        .profileImageUrl(profileImageUrl)
+                        .isDefaultImage(isDefaultImage)
+                        .isDefaultNickName(isDefaultNickName)
+                        .build();
+        }
+}

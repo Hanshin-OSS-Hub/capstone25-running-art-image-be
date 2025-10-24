@@ -1,14 +1,13 @@
 package com.aetheri.application.port.out.kakao;
 
 import com.aetheri.application.result.kakao.KakaoTokenResult;
-import com.aetheri.infrastructure.adapter.out.kakao.KakaoGetAccessTokenAdapter;
 import reactor.core.publisher.Mono;
 
 /**
  * 카카오(Kakao) OAuth 2.0 서버로부터 **액세스 토큰**을 발급받기 위한 아웃고잉 포트(Port)입니다.
  * 이 포트는 인증 코드(Authorization Code)를 사용하여 토큰 엔드포인트에 요청을 보내는 외부 통신 구현체에 대한 추상화를 제공합니다.
  *
- * @see KakaoGetAccessTokenAdapter 실제 카카오 API 호출 구현체(어댑터)의 예시입니다.
+ * @see com.aetheri.infrastructure.adapter.out.kakao.KakaoGetAccessTokenAdapter 실제 카카오 API 호출 구현체(어댑터)의 예시입니다.
  */
 public interface KakaoGetAccessTokenPort {
 
