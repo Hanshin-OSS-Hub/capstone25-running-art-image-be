@@ -1,5 +1,6 @@
 package com.aetheri.infrastructure.persistence.entity;
 
+import com.aetheri.application.result.kakao.KakaoTokenResult;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -62,6 +63,15 @@ public class KakaoToken {
      */
     public static KakaoToken toEntity(Long runnerId, String accessToken, String refreshToken) {
         return KakaoToken.builder()
+                .runnerId(runnerId)
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
+                .build();
+    }
+
+    public KakaoTokenResult toResult(){
+        return KakaoTokenResult.builder()
+                .id(id)
                 .runnerId(runnerId)
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
