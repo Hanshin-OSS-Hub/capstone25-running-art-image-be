@@ -137,7 +137,7 @@ public class ImageMetadata {
      *
      * @return 변환된 {@code ImageMetadataResponse} DTO입니다.
      */
-    public ImageMetadataResult toResponse(){
+    public ImageMetadataResult toResult(){
         return ImageMetadataResult.builder()
                 .title(title)
                 .description(description)

@@ -45,7 +45,7 @@ public class FindImageMetadataService implements FindImageMetadataUseCase {
                 .flatMap(imageMetadata -> {
                     log.info("[FindImageMetadataMetadataService] 사용자 {}가 이미지 {}를 조회했습니다.", runnerId, imageId);
                     if (imageMetadata.getShared() || imageMetadata.getRunnerId().equals(runnerId)) {
-                        return Mono.just(imageMetadata.toResponse());
+                        return Mono.just(imageMetadata.toResult());
                     } else {
                         return Mono.error(
                                 new BusinessException(
@@ -75,7 +75,7 @@ public class FindImageMetadataService implements FindImageMetadataUseCase {
                 .flatMap(imageMetadata -> {
                     log.info("[FindImageMetadataMetadataService] 이미지 {}를 조회했습니다.", imageId);
                     if (imageMetadata.getShared()) {
-                        return Mono.just(imageMetadata.toResponse());
+                        return Mono.just(imageMetadata.toResult());
                     } else {
                         return Mono.error(
                                 new BusinessException(
@@ -95,7 +95,7 @@ public class FindImageMetadataService implements FindImageMetadataUseCase {
      */
     @Override
     public Flux<ImageMetadataResult> findImageMetadataByRunnerId(Long runnerId) {
-        return imageMetadataRepositoryPort.findByRunnerId(runnerId).map(ImageMetadata::toResponse)
+        return imageMetadataRepositoryPort.findByRunnerId(runnerId).map(ImageMetadata::toResult)
                 .doOnComplete(() -> log.info("[FindImageMetadataMetadataService] 사용자 {}의 이미지를 조회했습니다.", runnerId));
     }
 }
