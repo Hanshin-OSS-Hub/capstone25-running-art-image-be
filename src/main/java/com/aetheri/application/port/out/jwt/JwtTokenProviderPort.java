@@ -23,7 +23,7 @@ public interface JwtTokenProviderPort {
      * 토큰 자체와 추가 정보(JTI, 발급 시각 등)를 포함하여 응답합니다.
      *
      * @param authentication 토큰을 생성하는 데 필요한 사용자 인증 및 권한 정보 객체입니다.
-     * @return 생성된 리프레시 토큰 문자열과 관련 메타데이터를 담은 {@code RefreshTokenIssueResponse} 객체입니다.
+     * @return 생성된 리프레시 토큰 문자열과 관련 메타데이터를 담은 {@code RefreshTokenIssueResult} 객체입니다.
      * @see RefreshTokenIssueResult 리프레시 토큰 발급 응답에 대한 상세 정보
      */
     RefreshTokenIssueResult generateRefreshToken(Authentication authentication);
