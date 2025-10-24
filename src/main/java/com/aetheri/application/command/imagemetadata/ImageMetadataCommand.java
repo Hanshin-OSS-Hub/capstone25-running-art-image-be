@@ -23,7 +23,7 @@ import java.time.LocalDate;
  */
 @Builder
 @Schema(description = "이미지 메타데이터 및 접근 경로를 포함하는 최종 응답 DTO")
-public record ImageMetadataResponse(
+public record ImageMetadataCommand(
         @Schema(
                 description = "이미지의 현재 제목",
                 example = "나의 런닝 아트"

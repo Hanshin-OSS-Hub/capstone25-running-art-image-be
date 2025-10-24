@@ -1,8 +1,8 @@
 package com.aetheri.infrastructure.adapter.in.web.router;
 
-import com.aetheri.application.command.imagemetadata.ImageMetadataResponse;
-import com.aetheri.application.command.imagemetadata.ImageMetadataSaveRequest;
-import com.aetheri.application.command.imagemetadata.ImageMetadataUpdateRequest;
+import com.aetheri.application.command.imagemetadata.ImageMetadataCommand;
+import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataSaveRequest;
+import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataUpdateRequest;
 import com.aetheri.infrastructure.adapter.in.web.handler.ImageMetadataHandler;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -58,7 +58,7 @@ public class ImageMetadataRouter {
                                     @ApiResponse(
                                             responseCode = "200",
                                             description = "정상적으로 이미지 메타데이터를 반환합니다.",
-                                            content = @Content(schema = @Schema(implementation = ImageMetadataResponse.class))
+                                            content = @Content(schema = @Schema(implementation = ImageMetadataCommand.class))
                                     ),
                                     @ApiResponse(
                                             responseCode = "404",
@@ -82,7 +82,7 @@ public class ImageMetadataRouter {
                                     @ApiResponse(
                                             responseCode = "200",
                                             description = "이미지 메타데이터 목록이 SSE 형태로 스트리밍됩니다.",
-                                            content = @Content(mediaType = MediaType.TEXT_EVENT_STREAM_VALUE, schema = @Schema(implementation = ImageMetadataResponse.class))
+                                            content = @Content(mediaType = MediaType.TEXT_EVENT_STREAM_VALUE, schema = @Schema(implementation = ImageMetadataCommand.class))
                                     ),
                                     @ApiResponse(
                                             responseCode = "401",

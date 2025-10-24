@@ -1,4 +1,4 @@
-package com.aetheri.application.command.imagemetadata;
+package com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata;
 
 import com.aetheri.domain.enums.image.Proficiency;
 import com.aetheri.domain.enums.image.Shape;

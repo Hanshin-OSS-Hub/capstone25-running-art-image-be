@@ -1,6 +1,6 @@
 package com.aetheri.application.service.imagemetadata;
 
-import com.aetheri.application.command.imagemetadata.ImageMetadataSaveRequest;
+import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataSaveRequest;
 import com.aetheri.application.port.in.imagemetadata.SaveImageMetadataUseCase;
 import com.aetheri.application.port.out.imagemetadata.ImageMetadataRepositoryPort;
 import lombok.RequiredArgsConstructor;
