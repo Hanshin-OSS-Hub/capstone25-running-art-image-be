@@ -1,8 +1,9 @@
 package com.aetheri.infrastructure.adapter.in.jwt;
 
+import com.aetheri.application.port.in.redis.RefreshTokenUseCase;
 import com.aetheri.application.port.out.jwt.JwtTokenResolverPort;
 import com.aetheri.application.port.out.jwt.JwtTokenValidatorPort;
-import com.aetheri.application.service.redis.refreshtoken.RefreshTokenPort;
+import com.aetheri.application.service.redis.refreshtoken.RefreshTokenService;
 import com.aetheri.infrastructure.config.properties.JWTProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -44,7 +45,7 @@ import java.util.stream.Collectors;
  *
  * @see JwtTokenValidatorPort 토큰 유효성 검증 포트
  * @see JwtTokenResolverPort 토큰 내용(ID, 역할) 추출 포트
- * @see RefreshTokenPort 토큰 재발급 서비스
+ * @see RefreshTokenService 토큰 재발급 서비스
  * @see JWTProperties JWT 설정 정보
  */
 @Slf4j
@@ -53,7 +54,7 @@ public class JwtAuthenticationFilter implements WebFilter {
 
     private final JwtTokenValidatorPort jwtTokenValidatorPort;
     private final JwtTokenResolverPort jwtTokenResolverPort;
-    private final RefreshTokenPort refreshTokenPort;
+    private final RefreshTokenUseCase refreshTokenUseCase;
     private final JWTProperties jwtProperties;
 
     /**
@@ -75,7 +76,7 @@ public class JwtAuthenticationFilter implements WebFilter {
                 // 2. 만료된 액세스 토큰: 리프레시 토큰으로 재발급 시도
                 String refreshToken = getRefreshTokenFromCookie(exchange);
                 if (refreshToken != null && !refreshToken.isBlank()) {
-                    return refreshTokenPort.reissueTokens(refreshToken)
+                    return refreshTokenUseCase.reissueTokens(refreshToken)
                             .flatMap(tokenResponse -> {
                                 // 2-1. 새 액세스 토큰을 응답 헤더에 설정
                                 exchange.getResponse().getHeaders().set(jwtProperties.accessTokenHeader(), "Bearer " + tokenResponse.accessToken());
