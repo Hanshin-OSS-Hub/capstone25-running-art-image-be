@@ -1,20 +1,20 @@
-package com.aetheri.application.command.imagemetadata;
+package com.aetheri.infrastructure.adapter.in.web.dto.in;
 
+import com.aetheri.application.command.imagemetadata.ImageMetadataUpdateCommand;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import jakarta.validation.constraints.NotNull;
-import lombok.Builder;
 
 /**
  * 이미지 메타데이터 수정을 요청하는 데 사용되는 레코드입니다.
  * 이 레코드는 이미지의 제목과 설명을 업데이트하기 위한 정보를 담고 있으며,
  * 요청 본문(Request Body)으로 사용됩니다.
  *
- * @param title 이미지의 새로운 제목입니다.
+ * @param title       이미지의 새로운 제목입니다.
  * @param description 이미지에 대한 새로운 간략한 설명입니다.
+ * @see ImageMetadataUpdateCommand
  */
-@Builder
-public record ImageMetadataUpdateCommand(
+public record ImageMetadataUpdateRequest(
         @NotNull
         @Schema(
                 description = "이미지의 새로운 제목. 이 값은 필수로 제공되어야 합니다.",
@@ -30,9 +30,10 @@ public record ImageMetadataUpdateCommand(
         )
         String description
 ) {
-    /*
-    레코드의 기본 생성자 또는 비즈니스 로직을 추가할 수 있습니다.
-    참고: 자바 레코드에서는 필드에 직접 기본값을 설정할 수 없으며,
-    기본값 처리는 서비스/핸들러 계층에서 수행해야 합니다.
-    */
+    public ImageMetadataUpdateCommand toCommand() {
+        return ImageMetadataUpdateCommand.builder()
+                .title(title)
+                .description(description)
+                .build();
+    }
 }
