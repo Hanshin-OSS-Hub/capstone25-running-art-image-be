@@ -44,7 +44,7 @@ public class ImageMetadataHandler {
     // Server-Sent Events (SSE) 응답을 위한 인코더 및 버퍼 설정
     private final Jackson2JsonEncoder jackson2JsonEncoder;
     private final DefaultDataBufferFactory dataBufferFactory;
-    private final ResolvableType elementType = ResolvableType.forClass(ImageMetadataResult.class);
+    private final ResolvableType elementType = ResolvableType.forClass(ImageMetadataResponse.class);
 
 
     /**
