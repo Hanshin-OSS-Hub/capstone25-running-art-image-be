@@ -1,8 +1,9 @@
-package com.aetheri.infrastructure.adapter.out.address.dto;
+package com.aetheri.application.result.address;
 
-import com.aetheri.application.result.address.JusoResult;
+import lombok.Builder;
 
-public record Juso(
+@Builder
+public record JusoResult(
     String roadAddr,    // 전체 도로명 주소
     String jibunAddr,   // 전체 지번 주소
     String zipNo        // 우편번호
@@ -39,11 +40,4 @@ public record Juso(
     String relJibun,
     String hemdNm*/
 ) {
-    public static JusoResult toResult(Juso juso) {
-        return JusoResult.builder()
-                .roadAddr(juso.roadAddr())
-                .jibunAddr(juso.jibunAddr())
-                .zipNo(juso.zipNo())
-                .build();
-    }
 }
