@@ -1,6 +1,6 @@
 package com.aetheri.application.service.sign;
 
-import com.aetheri.application.command.kakao.KakaoTokenResult;
+import com.aetheri.application.result.kakao.KakaoTokenResult;
 import com.aetheri.application.port.in.sign.SignOutUseCase;
 import com.aetheri.application.port.out.kakao.KakaoLogoutPort;
 import com.aetheri.application.port.out.kakao.KakaoRefreshTokenPort;

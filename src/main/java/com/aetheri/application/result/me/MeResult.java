@@ -1,4 +1,4 @@
-package com.aetheri.application.command.me;
+package com.aetheri.application.result.me;
 
 import com.aetheri.infrastructure.persistence.entity.Runner;
 

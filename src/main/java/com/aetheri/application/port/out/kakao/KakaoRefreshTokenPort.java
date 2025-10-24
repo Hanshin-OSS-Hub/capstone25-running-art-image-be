@@ -1,6 +1,6 @@
 package com.aetheri.application.port.out.kakao;
 
-import com.aetheri.application.command.kakao.KakaoTokenResult;
+import com.aetheri.application.result.kakao.KakaoTokenResult;
 import com.aetheri.infrastructure.adapter.out.kakao.KakaoRefreshTokenAdapter;
 import reactor.core.publisher.Mono;
 

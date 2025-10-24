@@ -1,6 +1,6 @@
 package com.aetheri.application.service.me;
 
-import com.aetheri.application.command.me.MeResult;
+import com.aetheri.application.result.me.MeResult;
 import com.aetheri.application.port.out.r2dbc.RunnerRepositoryPort;
 import com.aetheri.domain.exception.BusinessException;
 import com.aetheri.domain.exception.message.ErrorMessage;

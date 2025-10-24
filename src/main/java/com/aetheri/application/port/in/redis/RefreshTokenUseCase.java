@@ -1,6 +1,6 @@
 package com.aetheri.application.port.in.redis;
 
-import com.aetheri.application.command.jwt.TokenResult;
+import com.aetheri.application.result.jwt.TokenResult;
 import reactor.core.publisher.Mono;
 
 public interface RefreshTokenUseCase {

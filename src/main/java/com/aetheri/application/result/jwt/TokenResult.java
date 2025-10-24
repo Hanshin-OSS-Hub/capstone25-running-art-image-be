@@ -1,4 +1,4 @@
-package com.aetheri.application.command.jwt;
+package com.aetheri.application.result.jwt;
 
 /**
  * 서버 내부에서 사용되는 토큰 응답 레코드입니다.

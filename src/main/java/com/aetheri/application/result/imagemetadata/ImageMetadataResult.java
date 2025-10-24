@@ -1,4 +1,4 @@
-package com.aetheri.application.command.imagemetadata;
+package com.aetheri.application.result.imagemetadata;
 
 import com.aetheri.domain.enums.image.Proficiency;
 import com.aetheri.domain.enums.image.Shape;

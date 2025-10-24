@@ -1,4 +1,4 @@
-package com.aetheri.application.command.kakao;
+package com.aetheri.application.result.kakao;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

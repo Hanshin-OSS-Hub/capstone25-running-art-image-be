@@ -1,6 +1,6 @@
 package com.aetheri.infrastructure.adapter.out.jwt;
 
-import com.aetheri.application.command.jwt.RefreshTokenIssueResult;
+import com.aetheri.application.result.jwt.RefreshTokenIssueResult;
 import com.aetheri.application.port.out.jwt.JwtTokenProviderPort;
 import com.aetheri.infrastructure.config.properties.JWTProperties;
 import io.jsonwebtoken.*;

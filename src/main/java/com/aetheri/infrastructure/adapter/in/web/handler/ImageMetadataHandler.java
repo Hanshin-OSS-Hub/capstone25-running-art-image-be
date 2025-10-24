@@ -1,6 +1,6 @@
 package com.aetheri.infrastructure.adapter.in.web.handler;
 
-import com.aetheri.application.command.imagemetadata.ImageMetadataResult;
+import com.aetheri.application.result.imagemetadata.ImageMetadataResult;
 import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataSaveRequest;
 import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataUpdateRequest;
 import com.aetheri.application.port.in.imagemetadata.DeleteImageMetadataUseCase;

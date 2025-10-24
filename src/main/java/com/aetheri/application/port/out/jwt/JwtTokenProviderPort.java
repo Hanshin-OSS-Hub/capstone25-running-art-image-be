@@ -1,6 +1,6 @@
 package com.aetheri.application.port.out.jwt;
 
-import com.aetheri.application.command.jwt.RefreshTokenIssueResult;
+import com.aetheri.application.result.jwt.RefreshTokenIssueResult;
 import com.aetheri.infrastructure.adapter.out.jwt.JwtTokenProvider;
 import org.springframework.security.core.Authentication;
 

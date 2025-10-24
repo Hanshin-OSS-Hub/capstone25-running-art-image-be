@@ -1,6 +1,6 @@
 package com.aetheri.infrastructure.adapter.out.kakao;
 
-import com.aetheri.application.command.kakao.KakaoTokenResult;
+import com.aetheri.application.result.kakao.KakaoTokenResult;
 import com.aetheri.application.port.out.kakao.KakaoRefreshTokenPort;
 import com.aetheri.domain.exception.BusinessException;
 import com.aetheri.domain.exception.message.ErrorMessage;
