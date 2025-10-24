@@ -1,14 +1,13 @@
 package com.aetheri.application.port.out.jwt;
 
 import com.aetheri.application.result.jwt.RefreshTokenIssueResult;
-import com.aetheri.infrastructure.adapter.out.jwt.JwtTokenProvider;
 import org.springframework.security.core.Authentication;
 
 /**
  * JWT(JSON Web Token)를 생성하는 아웃고잉 포트(Port)입니다.
  * 이 포트는 시스템의 비즈니스 로직(유즈케이스)이 토큰 생성 구현체(어댑터)에 의존하지 않도록 분리하는 역할을 합니다.
  *
- * @see JwtTokenProvider 실제 구현체(어댑터)의 예시입니다.
+ * @see com.aetheri.infrastructure.adapter.out.jwt.JwtTokenProvider 실제 구현체(어댑터)의 예시입니다.
  */
 public interface JwtTokenProviderPort {
     /**
