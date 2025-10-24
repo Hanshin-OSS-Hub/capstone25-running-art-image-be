@@ -6,5 +6,5 @@ package com.aetheri.application.command.kakao;
  *
  * @param id 탈퇴가 성공적으로 처리된 회원의 고유 식별자(ID)입니다.
  */
-public record UnlinkResponse(Long id) {
+public record UnlinkResult(Long id) {
 }

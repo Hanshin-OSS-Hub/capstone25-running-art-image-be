@@ -1,4 +1,4 @@
-package com.aetheri.infrastructure.adapter.out.kakao.dto;
+package com.aetheri.application.command.kakao;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @param refreshToken 액세스 토큰 만료 시 재발급에 사용되는 토큰 문자열입니다. JSON 필드명은 {@code refresh_token}입니다.
  * @param refreshTokenExpiresIn 리프레시 토큰의 유효 기간(초)입니다. JSON 필드명은 {@code refresh_token_expires_in}입니다.
  */
-public record KakaoTokenResponse(
+public record KakaoTokenResult(
         @JsonProperty("access_token")
         String accessToken,
 

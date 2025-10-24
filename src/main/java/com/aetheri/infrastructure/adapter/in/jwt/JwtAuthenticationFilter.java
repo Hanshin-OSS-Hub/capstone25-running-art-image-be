@@ -84,7 +84,7 @@ public class JwtAuthenticationFilter implements WebFilter {
                                 // 2-2. 새 리프레시 토큰을 HttpOnly 쿠키에 설정
                                 ResponseCookie cookie = ResponseCookie.from(
                                                 jwtProperties.refreshTokenCookie(),
-                                                tokenResponse.refreshTokenIssueResponse().refreshToken()
+                                                tokenResponse.refreshTokenIssueResult().refreshToken()
                                         )
                                         .httpOnly(true)
                                         .secure(true) // HTTPS에서만 사용 (배포 환경 고려)

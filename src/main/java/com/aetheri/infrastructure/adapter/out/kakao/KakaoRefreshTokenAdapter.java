@@ -1,6 +1,6 @@
 package com.aetheri.infrastructure.adapter.out.kakao;
 
-import com.aetheri.infrastructure.adapter.out.kakao.dto.KakaoTokenResponse;
+import com.aetheri.application.command.kakao.KakaoTokenResult;
 import com.aetheri.application.port.out.kakao.KakaoRefreshTokenPort;
 import com.aetheri.domain.exception.BusinessException;
 import com.aetheri.domain.exception.message.ErrorMessage;
@@ -58,7 +58,7 @@ public class KakaoRefreshTokenAdapter implements KakaoRefreshTokenPort {
      * @see <a href="https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#refresh-token">카카오 REST API - 토큰 갱신</a>
      */
     @Override
-    public Mono<KakaoTokenResponse> refreshAccessToken(String refreshToken) {
+    public Mono<KakaoTokenResult> refreshAccessToken(String refreshToken) {
         log.info(refreshToken);
         if (refreshToken == null || refreshToken.isBlank()) {
             return Mono.error(new BusinessException(
@@ -76,6 +76,6 @@ public class KakaoRefreshTokenAdapter implements KakaoRefreshTokenPort {
                         .with("refresh_token", refreshToken)
                 )
                 // WebClient 응답을 처리하고 오류를 적절히 변환합니다.
-                .exchangeToMono(WebClientErrorHandler.handleErrors(KakaoTokenResponse.class));
+                .exchangeToMono(WebClientErrorHandler.handleErrors(KakaoTokenResult.class));
     }
 }

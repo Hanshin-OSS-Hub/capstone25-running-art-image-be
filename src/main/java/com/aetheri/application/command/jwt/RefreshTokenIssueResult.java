@@ -18,7 +18,7 @@ import java.time.Instant;
  * @param issuedAt 토큰이 발급된 시간(UTC 기준)을 나타내는 {@code Instant} 값입니다.
  */
 @Builder(access = AccessLevel.PRIVATE)
-public record RefreshTokenIssueResponse(
+public record RefreshTokenIssueResult(
         String refreshToken,
         String jti,
         Instant issuedAt
@@ -32,8 +32,8 @@ public record RefreshTokenIssueResponse(
      * @param issuedAt 토큰이 발급된 시간
      * @return 새로 생성된 {@code RefreshTokenIssueResponse} 레코드 인스턴스
      */
-    public static RefreshTokenIssueResponse of(String refreshToken, String jti, Instant issuedAt) {
-        return RefreshTokenIssueResponse.builder()
+    public static RefreshTokenIssueResult of(String refreshToken, String jti, Instant issuedAt) {
+        return RefreshTokenIssueResult.builder()
                 .refreshToken(refreshToken)
                 .jti(jti)
                 .issuedAt(issuedAt)

@@ -1,6 +1,6 @@
 package com.aetheri.infrastructure.adapter.in.web.handler;
 
-import com.aetheri.application.command.imagemetadata.ImageMetadataCommand;
+import com.aetheri.application.command.imagemetadata.ImageMetadataResult;
 import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataSaveRequest;
 import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataUpdateRequest;
 import com.aetheri.application.port.in.imagemetadata.DeleteImageMetadataUseCase;
@@ -43,7 +43,7 @@ public class ImageMetadataHandler {
     // Server-Sent Events (SSE) 응답을 위한 인코더 및 버퍼 설정
     private final Jackson2JsonEncoder jackson2JsonEncoder;
     private final DefaultDataBufferFactory dataBufferFactory;
-    private final ResolvableType elementType = ResolvableType.forClass(ImageMetadataCommand.class);
+    private final ResolvableType elementType = ResolvableType.forClass(ImageMetadataResult.class);
 
 
     /**

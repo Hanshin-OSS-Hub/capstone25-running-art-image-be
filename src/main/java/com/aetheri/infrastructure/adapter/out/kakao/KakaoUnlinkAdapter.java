@@ -1,6 +1,6 @@
 package com.aetheri.infrastructure.adapter.out.kakao;
 
-import com.aetheri.application.command.kakao.UnlinkResponse;
+import com.aetheri.application.command.kakao.UnlinkResult;
 import com.aetheri.application.port.out.kakao.KakaoUnlinkPort;
 import com.aetheri.application.util.ValidationUtils;
 import com.aetheri.domain.exception.message.ErrorMessage;
@@ -51,8 +51,8 @@ public class KakaoUnlinkAdapter implements KakaoUnlinkPort {
                 // 액세스 토큰을 Bearer 스키마로 헤더에 설정
                 .headers(s -> s.setBearerAuth(accessToken))
                 // WebClient 응답을 처리하고 오류를 적절히 변환합니다. (UnlinkResponse DTO로 매핑)
-                .exchangeToMono(WebClientErrorHandler.handleErrors(UnlinkResponse.class))
+                .exchangeToMono(WebClientErrorHandler.handleErrors(UnlinkResult.class))
                 // 응답 DTO에서 카카오 고유 ID를 추출하여 Mono<Long>으로 변환
-                .map(UnlinkResponse::id);
+                .map(UnlinkResult::id);
     }
 }

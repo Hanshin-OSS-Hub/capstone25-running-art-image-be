@@ -1,6 +1,6 @@
 package com.aetheri.application.port.out.jwt;
 
-import com.aetheri.application.command.jwt.RefreshTokenIssueResponse;
+import com.aetheri.application.command.jwt.RefreshTokenIssueResult;
 import com.aetheri.infrastructure.adapter.out.jwt.JwtTokenProvider;
 import org.springframework.security.core.Authentication;
 
@@ -25,7 +25,7 @@ public interface JwtTokenProviderPort {
      *
      * @param authentication 토큰을 생성하는 데 필요한 사용자 인증 및 권한 정보 객체입니다.
      * @return 생성된 리프레시 토큰 문자열과 관련 메타데이터를 담은 {@code RefreshTokenIssueResponse} 객체입니다.
-     * @see RefreshTokenIssueResponse 리프레시 토큰 발급 응답에 대한 상세 정보
+     * @see RefreshTokenIssueResult 리프레시 토큰 발급 응답에 대한 상세 정보
      */
-    RefreshTokenIssueResponse generateRefreshToken(Authentication authentication);
+    RefreshTokenIssueResult generateRefreshToken(Authentication authentication);
 }

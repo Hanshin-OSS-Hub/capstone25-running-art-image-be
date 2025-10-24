@@ -1,7 +1,7 @@
 package com.aetheri.application.service.redis.refreshtoken;
 
-import com.aetheri.application.command.jwt.RefreshTokenIssueResponse;
-import com.aetheri.application.command.jwt.TokenResponse;
+import com.aetheri.application.command.jwt.RefreshTokenIssueResult;
+import com.aetheri.application.command.jwt.TokenResult;
 import com.aetheri.application.port.out.jwt.JwtTokenProviderPort;
 import com.aetheri.application.port.out.jwt.JwtTokenResolverPort;
 import com.aetheri.application.port.out.redis.RedisRefreshTokenRepositoryPort;
@@ -36,7 +36,7 @@ public class RefreshTokenPort {
      * @return 새로운 액세스 토큰과 리프레시 토큰 정보를 담은 {@code TokenResponse}를 발행하는 {@code Mono}입니다.
      * @throws BusinessException Redis에서 해당 사용자의 리프레시 토큰을 찾을 수 없을 때 발생합니다.
      */
-    public Mono<TokenResponse> refreshToken(Long runnerId) {
+    public Mono<TokenResult> refreshToken(Long runnerId) {
         // Redis에서 리프레시 토큰을 찾습니다.
         return findRefreshTokenFromRedis(runnerId)
                 // 찾아온 리프레시 토큰을 사용하여 토큰을 재발급합니다.
@@ -49,7 +49,7 @@ public class RefreshTokenPort {
      * @param refreshToken 재발급에 사용될 리프레시 토큰 문자열입니다.
      * @return 새로운 토큰 정보를 담은 {@code TokenResponse}를 발행하는 {@code Mono}입니다.
      */
-    public Mono<TokenResponse> reissueTokens(String refreshToken) {
+    public Mono<TokenResult> reissueTokens(String refreshToken) {
         // 리프레시 토큰에서 사용자 ID를 추출합니다. (블로킹 작업을 반응형으로 감싸 처리)
         return extractRunnerIdReactive(refreshToken)
                 // 사용자 ID를 사용해서 Spring Security의 Authentication 객체를 만듭니다.
@@ -77,7 +77,7 @@ public class RefreshTokenPort {
      * @param auth 토큰 재발급에 사용될 사용자 인증 정보({@code Authentication})입니다.
      * @return 새로운 토큰 정보를 담은 {@code TokenResponse}를 발행하는 {@code Mono}입니다.
      */
-    private Mono<TokenResponse> deleteOldTokenAndCreateNew(Authentication auth) {
+    private Mono<TokenResult> deleteOldTokenAndCreateNew(Authentication auth) {
         Long runnerId = Long.valueOf(auth.getName());
         return redisRefreshTokenRepositoryPort
                 // 기존의 리프레시 토큰을 삭제합니다.
@@ -111,15 +111,15 @@ public class RefreshTokenPort {
      * @param runnerId 토큰을 저장할 사용자의 고유 식별자(ID)입니다.
      * @return 새로운 토큰 쌍을 담은 {@code TokenResponse}를 발행하는 {@code Mono}입니다.
      */
-    private Mono<TokenResponse> createAndSaveRefreshToken(Authentication authentication, Long runnerId) {
+    private Mono<TokenResult> createAndSaveRefreshToken(Authentication authentication, Long runnerId) {
         Mono<String> accessTokenMono = Mono.fromCallable(() -> jwtTokenProviderPort.generateAccessToken(authentication))
                 .subscribeOn(Schedulers.boundedElastic());
-        Mono<RefreshTokenIssueResponse> refreshTokenMono = Mono.fromCallable(() -> jwtTokenProviderPort.generateRefreshToken(authentication))
+        Mono<RefreshTokenIssueResult> refreshTokenMono = Mono.fromCallable(() -> jwtTokenProviderPort.generateRefreshToken(authentication))
                 .subscribeOn(Schedulers.boundedElastic());
 
         return accessTokenMono.zipWith(refreshTokenMono)
                 .flatMap(tuple -> redisRefreshTokenRepositoryPort
                         .saveRefreshToken(runnerId, tuple.getT2().refreshToken())
-                        .thenReturn(TokenResponse.of(tuple.getT1(), tuple.getT2())));
+                        .thenReturn(TokenResult.of(tuple.getT1(), tuple.getT2())));
     }
 }

@@ -1,6 +1,6 @@
 package com.aetheri.application.service.me;
 
-import com.aetheri.application.command.me.MeResponse;
+import com.aetheri.application.command.me.MeResult;
 import com.aetheri.application.port.out.r2dbc.RunnerRepositoryPort;
 import com.aetheri.domain.exception.BusinessException;
 import com.aetheri.domain.exception.message.ErrorMessage;
@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 public class MeService {
     private final RunnerRepositoryPort runnerRepositoryPort;
 
-    public Mono<MeResponse> me(Long id) {
+    public Mono<MeResult> me(Long id) {
         if (id == null || id <= 0) {
             return Mono.error(new BusinessException(
                     ErrorMessage.INVALID_REQUEST_PARAMETER,
@@ -25,6 +25,6 @@ public class MeService {
                         ErrorMessage.NOT_FOUND_RUNNER,
                         "사용자를 찾을 수 없습니다."))
                 )
-                .map(MeResponse::of);
+                .map(MeResult::of);
     }
 }

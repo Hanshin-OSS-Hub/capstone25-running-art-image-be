@@ -1,6 +1,6 @@
 package com.aetheri.application.port.out.kakao;
 
-import com.aetheri.infrastructure.adapter.out.kakao.dto.KakaoTokenResponse;
+import com.aetheri.application.command.kakao.KakaoTokenResult;
 import com.aetheri.infrastructure.adapter.out.kakao.KakaoGetAccessTokenAdapter;
 import reactor.core.publisher.Mono;
 
@@ -20,5 +20,5 @@ public interface KakaoGetAccessTokenPort {
      * @param code 카카오 로그인 성공 후 리다이렉션 시 받은 **인증 코드(Authorization Code)** 문자열입니다.
      * @return 카카오 서버의 응답 데이터를 담은 {@code KakaoTokenResponse} 객체를 발행하는 {@code Mono}입니다.
      */
-    Mono<KakaoTokenResponse> tokenRequest(String code);
+    Mono<KakaoTokenResult> tokenRequest(String code);
 }

@@ -1,6 +1,6 @@
 package com.aetheri.infrastructure.adapter.out.jwt;
 
-import com.aetheri.application.command.jwt.RefreshTokenIssueResponse;
+import com.aetheri.application.command.jwt.RefreshTokenIssueResult;
 import com.aetheri.application.port.out.jwt.JwtTokenProviderPort;
 import com.aetheri.infrastructure.config.properties.JWTProperties;
 import io.jsonwebtoken.*;
@@ -94,7 +94,7 @@ public class JwtTokenProvider implements JwtTokenProviderPort {
      * @return 생성된 리프레시 토큰 문자열과 관련 정보를 담은 {@code RefreshTokenIssueResponse}입니다.
      */
     @Override
-    public RefreshTokenIssueResponse generateRefreshToken(Authentication authentication) {
+    public RefreshTokenIssueResult generateRefreshToken(Authentication authentication) {
         log.debug("[TokenProvider] createRefreshToken({})", authentication.getName());
 
         Instant issuedAt = Instant.now();
@@ -114,7 +114,7 @@ public class JwtTokenProvider implements JwtTokenProviderPort {
 
         log.info("[TokenProvider] Refresh Token created for username: {}. Token length: {}", authentication.getName(), refreshToken.length());
 
-        return RefreshTokenIssueResponse.of(refreshToken, jti, issuedAt);
+        return RefreshTokenIssueResult.of(refreshToken, jti, issuedAt);
     }
 
     /**

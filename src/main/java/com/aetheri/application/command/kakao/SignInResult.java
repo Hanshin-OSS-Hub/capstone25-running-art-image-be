@@ -12,7 +12,7 @@ package com.aetheri.application.command.kakao;
  * @param refreshTokenExpirationTime 리프레시 토큰의 유효 기간(밀리초)입니다.
  * 이 값은 쿠키의 만료 시간 설정에 사용됩니다.
  */
-public record SignInResponse(
+public record SignInResult(
         String accessToken,
         String refreshToken,
         long refreshTokenExpirationTime

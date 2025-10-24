@@ -1,8 +1,8 @@
 package com.aetheri.application.service.sign;
 
-import com.aetheri.infrastructure.adapter.out.kakao.dto.KakaoTokenResponse;
-import com.aetheri.application.command.kakao.SignInResponse;
-import com.aetheri.application.command.jwt.RefreshTokenIssueResponse;
+import com.aetheri.application.command.kakao.KakaoTokenResult;
+import com.aetheri.application.command.kakao.SignInResult;
+import com.aetheri.application.command.jwt.RefreshTokenIssueResult;
 import com.aetheri.application.port.in.sign.SignInUseCase;
 import com.aetheri.application.port.out.jwt.JwtTokenProviderPort;
 import com.aetheri.application.port.out.kakao.KakaoGetAccessTokenPort;
@@ -78,7 +78,7 @@ public class SignInPort implements SignInUseCase {
      * @return 로그인에 성공하면 시스템 JWT 토큰 정보를 담은 {@code SignInResponse}를 발행하는 {@code Mono}입니다.
      */
     @Override
-    public Mono<SignInResponse> signIn(String code) {
+    public Mono<SignInResult> signIn(String code) {
         // 코드가 유효한지 검증합니다.
         return validateCode(code)
                 // 카카오에서 액세스 토큰을 가져옵니다.
@@ -118,7 +118,7 @@ public class SignInPort implements SignInUseCase {
      * @return 카카오의 토큰 응답({@code KakaoTokenResponse})을 발행하는 {@code Mono}입니다.
      * @throws BusinessException 카카오 API에서 토큰을 가져오지 못했다면 {@code NOT_FOUND_ACCESS_TOKEN} 예외를 발생시킵니다.
      */
-    private Mono<KakaoTokenResponse> getKakaoToken(String code) {
+    private Mono<KakaoTokenResult> getKakaoToken(String code) {
         return kakaoGetAccessTokenPort.tokenRequest(code)
                 .switchIfEmpty(Mono.error(new BusinessException(
                         ErrorMessage.NOT_FOUND_ACCESS_TOKEN,
@@ -134,7 +134,7 @@ public class SignInPort implements SignInUseCase {
      * @return 카카오 토큰 정보와 사용자 ID/이름을 담은 {@code KakaoTokenAndId}를 발행하는 {@code Mono}입니다.
      * @throws BusinessException 사용자 정보를 조회하지 못했다면 {@code NOT_FOUND_RUNNER} 예외를 발생시킵니다.
      */
-    private Mono<KakaoTokenAndId> getUserInfo(KakaoTokenResponse dto) {
+    private Mono<KakaoTokenAndId> getUserInfo(KakaoTokenResult dto) {
         return kakaoUserInformationInquiryPort.userInformationInquiry(dto.accessToken())
                 .switchIfEmpty(Mono.error(new BusinessException(
                         ErrorMessage.NOT_FOUND_RUNNER,
@@ -222,7 +222,7 @@ public class SignInPort implements SignInUseCase {
         // 액세스 토큰 생성
         String accessToken = jwtTokenProviderPort.generateAccessToken(auth);
         // 리프레시 토큰 생성
-        RefreshTokenIssueResponse refreshToken = jwtTokenProviderPort.generateRefreshToken(auth);
+        RefreshTokenIssueResult refreshToken = jwtTokenProviderPort.generateRefreshToken(auth);
 
         return redisRefreshTokenRepositoryPort
                 // 리프레시 토큰을 Redis에 저장합니다.
@@ -246,8 +246,8 @@ public class SignInPort implements SignInUseCase {
      * @param tokenBundle JWT 토큰 쌍이 담긴 내부 DTO입니다.
      * @return 최종 로그인 응답 DTO입니다.
      */
-    private SignInResponse toSignInResponse(TokenBundle tokenBundle) {
+    private SignInResult toSignInResponse(TokenBundle tokenBundle) {
         long expiresInSeconds = 60 * 60 * 24 * REFRESH_TOKEN_EXPIRATION_DAYS;
-        return new SignInResponse(tokenBundle.accessToken(), tokenBundle.refreshToken(), expiresInSeconds);
+        return new SignInResult(tokenBundle.accessToken(), tokenBundle.refreshToken(), expiresInSeconds);
     }
 }
