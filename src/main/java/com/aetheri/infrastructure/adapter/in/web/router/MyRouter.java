@@ -1,6 +1,6 @@
-package com.aetheri.interfaces.web.router;
+package com.aetheri.infrastructure.adapter.in.web.router;
 
-import com.aetheri.interfaces.web.handler.MyHandler;
+import com.aetheri.infrastructure.adapter.in.web.handler.MyHandler;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

@@ -1,4 +1,4 @@
-package com.aetheri.interfaces.web.handler;
+package com.aetheri.infrastructure.adapter.in.web.handler;
 
 import com.aetheri.application.port.in.imgfetch.ImageFetchUseCase;
 import lombok.RequiredArgsConstructor;

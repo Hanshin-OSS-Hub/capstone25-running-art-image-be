@@ -1,7 +1,7 @@
-package com.aetheri.interfaces.web.router;
+package com.aetheri.infrastructure.adapter.in.web.router;
 
 
-import com.aetheri.interfaces.web.handler.AuthHandler;
+import com.aetheri.infrastructure.adapter.in.web.handler.AuthHandler;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springdoc.core.annotations.RouterOperation;

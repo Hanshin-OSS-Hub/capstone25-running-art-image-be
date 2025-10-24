@@ -1,9 +1,9 @@
-package com.aetheri.interfaces.web.router;
+package com.aetheri.infrastructure.adapter.in.web.router;
 
 import com.aetheri.application.dto.image.ImageMetadataResponse;
 import com.aetheri.application.dto.image.ImageMetadataSaveRequest;
 import com.aetheri.application.dto.image.ImageMetadataUpdateRequest;
-import com.aetheri.interfaces.web.handler.ImageMetadataHandler;
+import com.aetheri.infrastructure.adapter.in.web.handler.ImageMetadataHandler;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;

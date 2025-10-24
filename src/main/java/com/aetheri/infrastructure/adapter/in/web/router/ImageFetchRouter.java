@@ -1,6 +1,6 @@
-package com.aetheri.interfaces.web.router;
+package com.aetheri.infrastructure.adapter.in.web.router;
 
-import com.aetheri.interfaces.web.handler.ImageFetchHandler;
+import com.aetheri.infrastructure.adapter.in.web.handler.ImageFetchHandler;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;

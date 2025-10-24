@@ -1,4 +1,4 @@
-package com.aetheri.interfaces.web.exception;
+package com.aetheri.infrastructure.adapter.in.web.exception;
 
 import com.aetheri.domain.exception.BusinessException;
 import com.aetheri.domain.exception.message.ErrorMessage;
