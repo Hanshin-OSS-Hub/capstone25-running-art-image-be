@@ -27,27 +27,27 @@ import java.util.Optional;
  */
 @Slf4j
 @Service
-public class SignInPort implements SignInUseCase {
+public class SignInService implements SignInUseCase {
     private final KakaoGetAccessTokenPort kakaoGetAccessTokenPort;
     private final KakaoUserInformationInquiryPort kakaoUserInformationInquiryPort;
     private final RunnerRepositoryPort runnerRepositoryPort;
     private final KakaoTokenRepositoryPort kakaoTokenRepositoryPort;
     private final RedisRefreshTokenRepositoryPort redisRefreshTokenRepositoryPort;
     private final JwtTokenProviderPort jwtTokenProviderPort;
-    private final SignUpPort signUpPort;
+    private final SignUpService signUpService;
 
     private final long REFRESH_TOKEN_EXPIRATION_DAYS;
 
     /**
      * {@code SignInPort}의 생성자입니다. 필요한 모든 의존성을 주입받고 JWT 설정을 초기화합니다.
      */
-    public SignInPort(
+    public SignInService(
             KakaoGetAccessTokenPort kakaoGetAccessTokenPort,
             KakaoUserInformationInquiryPort kakaoUserInformationInquiryPort,
             RunnerRepositoryPort runnerRepositoryPort,
             KakaoTokenRepositoryPort kakaoTokenRepositoryPort, RedisRefreshTokenRepositoryPort redisRefreshTokenRepositoryPort,
             JwtTokenProviderPort jwtTokenProviderPort,
-            SignUpPort signUpPort,
+            SignUpService signUpService,
             JWTProperties jwtProperties
     ) {
         this.kakaoGetAccessTokenPort = kakaoGetAccessTokenPort;
@@ -56,7 +56,7 @@ public class SignInPort implements SignInUseCase {
         this.kakaoTokenRepositoryPort = kakaoTokenRepositoryPort;
         this.redisRefreshTokenRepositoryPort = redisRefreshTokenRepositoryPort;
         this.jwtTokenProviderPort = jwtTokenProviderPort;
-        this.signUpPort = signUpPort;
+        this.signUpService = signUpService;
         this.REFRESH_TOKEN_EXPIRATION_DAYS = jwtProperties.refreshTokenExpirationDays();
     }
 
@@ -170,7 +170,7 @@ public class SignInPort implements SignInUseCase {
                         // 1. 사용자 존재 시: 사용자 정보 조회 (로그인)
                         runnerRepositoryPort.findByKakaoId(dto.id()) :
                         // 2. 사용자 미존재 시: 회원가입 수행 후 사용자 정보 조회
-                        signUpPort.signUp(dto.id(), dto.name())
+                        signUpService.signUp(dto.id(), dto.name())
                                 .then(runnerRepositoryPort.findByKakaoId(dto.id()))
                 ).map(runner -> new KakaoTokenAndId(
                         dto.accessToken(),

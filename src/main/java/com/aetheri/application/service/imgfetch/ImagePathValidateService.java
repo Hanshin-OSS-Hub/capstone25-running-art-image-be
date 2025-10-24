@@ -12,7 +12,7 @@ import reactor.core.publisher.Mono;
  */
 @Slf4j
 @Service
-public class ImagePathValidatePort implements ImagePathValidateUseCase {
+public class ImagePathValidateService implements ImagePathValidateUseCase {
     /**
      * 주어진 이미지 경로 문자열의 유효성을 검증합니다.
      *

@@ -22,7 +22,7 @@ import reactor.core.publisher.Mono;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class FindImageMetadataPort implements FindImageMetadataUseCase {
+public class FindImageMetadataService implements FindImageMetadataUseCase {
     private final ImageMetadataRepositoryPort imageMetadataRepositoryPort;
 
     /**

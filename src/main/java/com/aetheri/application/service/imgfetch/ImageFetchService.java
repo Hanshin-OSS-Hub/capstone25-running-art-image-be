@@ -19,7 +19,7 @@ import java.nio.file.Paths;
  */
 @Slf4j
 @Service
-public class ImageFetchPort implements ImageFetchUseCase {
+public class ImageFetchService implements ImageFetchUseCase {
     private final ResourceLoader resourceLoader;
     private final ImagePathValidateUseCase imagePathValidator;
     private final String locationPattern;
@@ -31,7 +31,7 @@ public class ImageFetchPort implements ImageFetchUseCase {
      * @param imagePathValidator 이미지 경로의 유효성을 검증하는 유즈케이스입니다.
      * @param imageProperties    이미지 파일 저장 경로 설정값을 담고 있는 프로퍼티 객체입니다.
      */
-    public ImageFetchPort(
+    public ImageFetchService(
             ResourceLoader resourceLoader,
             ImagePathValidateUseCase imagePathValidator,
             ImageProperties imageProperties

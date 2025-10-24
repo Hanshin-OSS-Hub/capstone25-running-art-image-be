@@ -22,7 +22,7 @@ import reactor.core.publisher.Mono;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class SignOutPort implements SignOutUseCase {
+public class SignOutService implements SignOutUseCase {
     private final KakaoTokenRepositoryPort kakaoTokenRepositoryPort;
     private final KakaoRefreshTokenPort kakaoRefreshTokenPort;
     private final KakaoLogoutPort kakaoLogoutPort;

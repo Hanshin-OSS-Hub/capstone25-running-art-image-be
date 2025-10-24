@@ -18,7 +18,7 @@ import reactor.core.publisher.Mono;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class SaveImageMetadataPort implements SaveImageMetadataUseCase {
+public class SaveImageMetadataService implements SaveImageMetadataUseCase {
     private final ImageMetadataRepositoryPort imageMetadataRepositoryPort;
 
     /**
