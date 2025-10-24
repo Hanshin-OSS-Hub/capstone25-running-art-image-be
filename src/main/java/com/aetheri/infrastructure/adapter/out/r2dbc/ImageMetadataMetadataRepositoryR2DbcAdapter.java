@@ -1,7 +1,7 @@
 package com.aetheri.infrastructure.adapter.out.r2dbc;
 
-import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataSaveRequest;
-import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataUpdateRequest;
+import com.aetheri.application.command.imagemetadata.ImageMetadataSaveRequest;
+import com.aetheri.application.command.imagemetadata.ImageMetadataUpdateRequest;
 import com.aetheri.application.port.out.imagemetadata.ImageMetadataRepositoryPort;
 import com.aetheri.infrastructure.persistence.repository.ImageMetadataR2dbcRepository;
 import com.aetheri.infrastructure.persistence.entity.ImageMetadata;

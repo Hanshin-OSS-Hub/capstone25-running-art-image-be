@@ -1,6 +1,6 @@
 package com.aetheri.infrastructure.persistence.entity;
 
-import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataResponse;
+import com.aetheri.application.command.imagemetadata.ImageMetadataResponse;
 import com.aetheri.domain.enums.image.Proficiency;
 import com.aetheri.domain.enums.image.Shape;
 import lombok.Builder;

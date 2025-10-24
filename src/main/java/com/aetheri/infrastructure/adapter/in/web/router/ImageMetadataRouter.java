@@ -1,8 +1,8 @@
 package com.aetheri.infrastructure.adapter.in.web.router;
 
-import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataResponse;
-import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataSaveRequest;
-import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataUpdateRequest;
+import com.aetheri.application.command.imagemetadata.ImageMetadataResponse;
+import com.aetheri.application.command.imagemetadata.ImageMetadataSaveRequest;
+import com.aetheri.application.command.imagemetadata.ImageMetadataUpdateRequest;
 import com.aetheri.infrastructure.adapter.in.web.handler.ImageMetadataHandler;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

@@ -1,6 +1,6 @@
 package com.aetheri.infrastructure.adapter.out.kakao;
 
-import com.aetheri.infrastructure.adapter.out.kakao.dto.UnlinkResponse;
+import com.aetheri.application.command.kakao.UnlinkResponse;
 import com.aetheri.application.port.out.kakao.KakaoUnlinkPort;
 import com.aetheri.application.util.ValidationUtils;
 import com.aetheri.domain.exception.message.ErrorMessage;

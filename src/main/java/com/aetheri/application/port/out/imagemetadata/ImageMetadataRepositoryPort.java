@@ -1,7 +1,7 @@
 package com.aetheri.application.port.out.imagemetadata;
 
-import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataSaveRequest;
-import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataUpdateRequest;
+import com.aetheri.application.command.imagemetadata.ImageMetadataSaveRequest;
+import com.aetheri.application.command.imagemetadata.ImageMetadataUpdateRequest;
 import com.aetheri.infrastructure.persistence.entity.ImageMetadata;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

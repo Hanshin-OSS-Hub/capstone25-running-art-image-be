@@ -1,4 +1,4 @@
-package com.aetheri.infrastructure.adapter.out.kakao.dto;
+package com.aetheri.application.command.kakao;
 
 /**
  * 로그인 성공 후 토큰 정보를 처리 핸들러에게 응답하기 위한 내부 DTO입니다.

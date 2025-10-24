@@ -1,6 +1,6 @@
 package com.aetheri.application.port.in.sign;
 
-import com.aetheri.infrastructure.adapter.out.kakao.dto.SignInResponse;
+import com.aetheri.application.command.kakao.SignInResponse;
 import reactor.core.publisher.Mono;
 
 /**

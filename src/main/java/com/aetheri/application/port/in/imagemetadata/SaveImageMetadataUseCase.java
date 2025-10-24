@@ -1,6 +1,6 @@
 package com.aetheri.application.port.in.imagemetadata;
 
-import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataSaveRequest;
+import com.aetheri.application.command.imagemetadata.ImageMetadataSaveRequest;
 import reactor.core.publisher.Mono;
 
 /**
