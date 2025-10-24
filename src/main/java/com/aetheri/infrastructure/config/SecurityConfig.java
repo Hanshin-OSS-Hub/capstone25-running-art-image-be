@@ -3,7 +3,7 @@ package com.aetheri.infrastructure.config;
 import com.aetheri.application.port.out.jwt.JwtTokenResolverPort;
 import com.aetheri.application.port.out.jwt.JwtTokenValidatorPort;
 import com.aetheri.application.service.redis.refreshtoken.RefreshTokenPort;
-import com.aetheri.domain.adapter.in.jwt.JwtAuthenticationFilter;
+import com.aetheri.infrastructure.adapter.in.jwt.JwtAuthenticationFilter;
 import com.aetheri.infrastructure.config.properties.JWTProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

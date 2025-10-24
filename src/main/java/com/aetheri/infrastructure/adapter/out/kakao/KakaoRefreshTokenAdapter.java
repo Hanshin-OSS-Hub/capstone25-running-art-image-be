@@ -1,4 +1,4 @@
-package com.aetheri.domain.adapter.out.kakao;
+package com.aetheri.infrastructure.adapter.out.kakao;
 
 import com.aetheri.application.dto.KakaoTokenResponse;
 import com.aetheri.application.port.out.kakao.KakaoRefreshTokenPort;

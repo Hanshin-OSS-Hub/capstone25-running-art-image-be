@@ -1,4 +1,4 @@
-package com.aetheri.domain.adapter.in.jwt;
+package com.aetheri.infrastructure.adapter.in.jwt;
 
 import com.aetheri.application.port.out.jwt.JwtTokenResolverPort;
 import com.aetheri.application.port.out.jwt.JwtTokenValidatorPort;

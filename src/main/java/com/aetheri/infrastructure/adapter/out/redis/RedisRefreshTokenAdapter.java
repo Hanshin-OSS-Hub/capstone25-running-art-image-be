@@ -1,4 +1,4 @@
-package com.aetheri.domain.adapter.out.redis;
+package com.aetheri.infrastructure.adapter.out.redis;
 
 import com.aetheri.application.port.out.redis.RedisRefreshTokenRepositoryPort;
 import com.aetheri.infrastructure.config.properties.JWTProperties;

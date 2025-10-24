@@ -1,5 +1,6 @@
 package com.aetheri.application.port.out.r2dbc;
 
+import com.aetheri.infrastructure.adapter.out.r2dbc.RunnerRepositoryR2dbcAdapter;
 import com.aetheri.infrastructure.persistence.entity.Runner;
 import reactor.core.publisher.Mono;
 
@@ -8,7 +9,7 @@ import reactor.core.publisher.Mono;
  * 이 포트는 **R2DBC**와 같은 반응형(Reactive) 데이터베이스 구현체를 통해
  * 사용자 정보를 조회, 저장, 삭제, 존재 여부를 확인하는 기능을 추상화합니다.
  *
- * @see com.aetheri.domain.adapter.out.r2dbc.RunnerRepositoryR2dbcAdapter 실제 R2DBC 기반 데이터 저장소 구현체(어댑터)의 예시입니다.
+ * @see RunnerRepositoryR2dbcAdapter 실제 R2DBC 기반 데이터 저장소 구현체(어댑터)의 예시입니다.
  */
 public interface RunnerRepositoryPort {
 

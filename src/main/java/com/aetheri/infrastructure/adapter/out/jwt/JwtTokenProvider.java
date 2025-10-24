@@ -1,4 +1,4 @@
-package com.aetheri.domain.adapter.out.jwt;
+package com.aetheri.infrastructure.adapter.out.jwt;
 
 import com.aetheri.application.dto.jwt.RefreshTokenIssueResponse;
 import com.aetheri.application.port.out.jwt.JwtTokenProviderPort;

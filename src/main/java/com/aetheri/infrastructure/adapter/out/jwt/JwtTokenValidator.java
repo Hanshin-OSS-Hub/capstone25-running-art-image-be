@@ -1,4 +1,4 @@
-package com.aetheri.domain.adapter.out.jwt;
+package com.aetheri.infrastructure.adapter.out.jwt;
 
 import com.aetheri.application.port.out.jwt.JwtTokenValidatorPort;
 import io.jsonwebtoken.JwtException;

@@ -1,4 +1,4 @@
-package com.aetheri.domain.adapter.out.address;
+package com.aetheri.infrastructure.adapter.out.address;
 
 import com.aetheri.application.dto.address.request.AddressSearchRequest;
 import com.aetheri.application.dto.address.response.AddressApiResponse;

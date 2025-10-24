@@ -1,4 +1,4 @@
-package com.aetheri.domain.adapter.out.r2dbc;
+package com.aetheri.infrastructure.adapter.out.r2dbc;
 
 import com.aetheri.application.port.out.r2dbc.KakaoTokenRepositoryPort;
 import com.aetheri.infrastructure.persistence.repository.KakaoTokenR2dbcRepository;
