@@ -24,7 +24,7 @@ import java.util.UUID;
  * <p>모든 데이터베이스 작업은 비동기/논블로킹 방식으로 {@code Mono} 또는 {@code Flux}를 반환합니다.</p>
  */
 @Repository
-public class ImageMetadataMetadataRepositoryR2DbcAdapter implements ImageMetadataRepositoryPort {
+public class ImageMetadataRepositoryR2DbcAdapter implements ImageMetadataRepositoryPort {
     private final ImageMetadataR2dbcRepository imageMetadataR2DbcRepository;
     private final R2dbcEntityTemplate r2dbcEntityTemplate;
 
@@ -34,7 +34,7 @@ public class ImageMetadataMetadataRepositoryR2DbcAdapter implements ImageMetadat
      * @param imageMetadataR2DbcRepository Spring Data R2DBC 리포지토리입니다.
      * @param r2dbcEntityTemplate 동적인 쿼리 및 업데이트를 위한 템플릿입니다.
      */
-    public ImageMetadataMetadataRepositoryR2DbcAdapter(
+    public ImageMetadataRepositoryR2DbcAdapter(
             ImageMetadataR2dbcRepository imageMetadataR2DbcRepository,
             R2dbcEntityTemplate r2dbcEntityTemplate
     ) {
