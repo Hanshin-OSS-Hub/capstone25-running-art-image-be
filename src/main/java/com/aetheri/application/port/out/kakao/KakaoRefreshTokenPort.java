@@ -1,6 +1,6 @@
 package com.aetheri.application.port.out.kakao;
 
-import com.aetheri.application.result.kakao.KakaoTokenResult;
+import com.aetheri.application.result.kakao.KakaoIssueTokenResult;
 import reactor.core.publisher.Mono;
 
 /**
@@ -21,5 +21,5 @@ public interface KakaoRefreshTokenPort {
      * @param refreshToken 토큰 재발급(갱신)에 사용할 카카오 리프레시 토큰 문자열입니다.
      * @return 카카오 서버의 응답 데이터를 담은 {@code KakaoTokenResponse} 객체를 발행하는 {@code Mono}입니다.
      */
-    Mono<KakaoTokenResult> refreshAccessToken(String refreshToken);
+    Mono<KakaoIssueTokenResult> refreshAccessToken(String refreshToken);
 }

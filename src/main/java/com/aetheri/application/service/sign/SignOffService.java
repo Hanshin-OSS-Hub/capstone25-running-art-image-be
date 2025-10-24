@@ -1,6 +1,6 @@
 package com.aetheri.application.service.sign;
 
-import com.aetheri.application.result.kakao.KakaoTokenResult;
+import com.aetheri.application.result.kakao.KakaoIssueTokenResult;
 import com.aetheri.application.port.in.sign.SignOffUseCase;
 import com.aetheri.application.port.out.kakao.KakaoRefreshTokenPort;
 import com.aetheri.application.port.out.kakao.KakaoUnlinkPort;
@@ -36,7 +36,7 @@ public class SignOffService implements SignOffUseCase {
      * <ol>
      * <li>데이터베이스에서 카카오 토큰 조회 ({@link #findKakaoToken(Long)})</li>
      * <li>카카오 리프레시 토큰 갱신 (안전한 액세스 토큰 확보) ({@link #refreshKakaoToken(KakaoToken)})</li>
-     * <li>카카오 API를 통한 사용자 계정 연동 해제(Unlink) ({@link #unlinkKakaoUser(KakaoTokenResult)})</li>
+     * <li>카카오 API를 통한 사용자 계정 연동 해제(Unlink) ({@link #unlinkKakaoUser(KakaoIssueTokenResult)})</li>
      * <li>데이터베이스의 카카오 토큰 정보 삭제 ({@link #deleteKakaoToken(Long)})</li>
      * <li>Redis의 리프레시 토큰 정보 삭제 ({@link #deleteRefreshTokenFromRedis(Long)})</li>
      * <li>데이터베이스의 사용자 정보(Runner) 삭제 ({@link #deleteRunner(Long)})</li>
@@ -91,7 +91,7 @@ public class SignOffService implements SignOffUseCase {
      * @param kakaoToken 재발급에 사용할 리프레시 토큰이 담긴 {@code KakaoToken} 객체입니다.
      * @return 카카오 API에서 받은 새로운 토큰 응답({@code KakaoTokenResponse})을 발행하는 {@code Mono}입니다.
      */
-    private Mono<KakaoTokenResult> refreshKakaoToken(KakaoToken kakaoToken) {
+    private Mono<KakaoIssueTokenResult> refreshKakaoToken(KakaoToken kakaoToken) {
         return kakaoRefreshTokenPort
                 .refreshAccessToken(kakaoToken.getRefreshToken());
     }
@@ -102,7 +102,7 @@ public class SignOffService implements SignOffUseCase {
      * @param tokenResponse 연동 해제에 사용할 액세스 토큰이 담긴 DTO입니다.
      * @return 연동 해제 작업이 완료되었을 때 종료되는 {@code Mono<Void>} 객체입니다.
      */
-    private Mono<Void> unlinkKakaoUser(KakaoTokenResult tokenResponse) {
+    private Mono<Void> unlinkKakaoUser(KakaoIssueTokenResult tokenResponse) {
         return kakaoUnlinkPort.unlink(tokenResponse.accessToken())
                 .then();
     }

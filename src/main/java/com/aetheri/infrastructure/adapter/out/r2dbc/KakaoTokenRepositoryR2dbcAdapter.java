@@ -60,7 +60,7 @@ public class KakaoTokenRepositoryR2dbcAdapter implements KakaoTokenRepositoryPor
      */
     @Override
     public Mono<KakaoToken> findByRunnerId(Long runnerId) {
-        return repository.findByRunnerId(runnerId);
+        return repository.findByRunnerId(runnerId).map(KakaoToken::toRe);
     }
 
     /**

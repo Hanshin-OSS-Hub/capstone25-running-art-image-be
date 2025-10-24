@@ -1,6 +1,6 @@
 package com.aetheri.infrastructure.adapter.out.kakao;
 
-import com.aetheri.application.result.kakao.KakaoTokenResult;
+import com.aetheri.application.result.kakao.KakaoIssueTokenResult;
 import com.aetheri.application.port.out.kakao.KakaoGetAccessTokenPort;
 import com.aetheri.infrastructure.config.properties.KakaoProperties;
 import com.aetheri.infrastructure.handler.WebClientErrorHandler;
@@ -51,7 +51,7 @@ public class KakaoGetAccessTokenAdapter implements KakaoGetAccessTokenPort {
      * @see <a href="https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#request-token">카카오 REST API - 토큰 요청</a>
      */
     @Override
-    public Mono<KakaoTokenResult> tokenRequest(String code) {
+    public Mono<KakaoIssueTokenResult> tokenRequest(String code) {
         return webClient.post()
                 .uri(uriBuilder -> uriBuilder
                         .scheme("https")
@@ -63,6 +63,6 @@ public class KakaoGetAccessTokenAdapter implements KakaoGetAccessTokenPort {
                         .build())
                 .header(HttpHeaders.CONTENT_TYPE, HttpHeaderValues.APPLICATION_X_WWW_FORM_URLENCODED.toString())
                 // WebClient 응답을 처리하고 오류를 적절히 변환합니다.
-                .exchangeToMono(WebClientErrorHandler.handleErrors(KakaoTokenResult.class));
+                .exchangeToMono(WebClientErrorHandler.handleErrors(KakaoIssueTokenResult.class));
     }
 }

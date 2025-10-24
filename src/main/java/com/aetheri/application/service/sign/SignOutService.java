@@ -1,6 +1,6 @@
 package com.aetheri.application.service.sign;
 
-import com.aetheri.application.result.kakao.KakaoTokenResult;
+import com.aetheri.application.result.kakao.KakaoIssueTokenResult;
 import com.aetheri.application.port.in.sign.SignOutUseCase;
 import com.aetheri.application.port.out.kakao.KakaoLogoutPort;
 import com.aetheri.application.port.out.kakao.KakaoRefreshTokenPort;
@@ -80,7 +80,7 @@ public class SignOutService implements SignOutUseCase {
      * @param kakaoToken 재발급에 사용할 리프레시 토큰이 담긴 객체입니다.
      * @return 카카오 API에서 받은 새로운 토큰 응답({@code KakaoTokenResponse})을 발행하는 {@code Mono}입니다.
      */
-    private Mono<KakaoTokenResult> refreshKakaoToken(KakaoToken kakaoToken) {
+    private Mono<KakaoIssueTokenResult> refreshKakaoToken(KakaoToken kakaoToken) {
         return kakaoRefreshTokenPort
                 .refreshAccessToken(kakaoToken.getRefreshToken());
     }
@@ -88,11 +88,11 @@ public class SignOutService implements SignOutUseCase {
     /**
      * 카카오 API에 로그아웃 요청을 보내 해당 액세스 토큰을 무효화합니다.
      *
-     * @param kakaoTokenResult 재발급받은 액세스 토큰이 담긴 DTO입니다.
+     * @param kakaoIssueTokenResult 재발급받은 액세스 토큰이 담긴 DTO입니다.
      * @return 카카오 로그아웃 작업이 완료되었을 때 종료되는 {@code Mono<Void>} 객체입니다.
      */
-    private Mono<Void> kakaoLogout(KakaoTokenResult kakaoTokenResult) {
-        return kakaoLogoutPort.logout(kakaoTokenResult.accessToken());
+    private Mono<Void> kakaoLogout(KakaoIssueTokenResult kakaoIssueTokenResult) {
+        return kakaoLogoutPort.logout(kakaoIssueTokenResult.accessToken());
     }
 
     /**

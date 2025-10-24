@@ -1,7 +1,7 @@
 package com.aetheri.application.service.sign;
 
 import com.aetheri.application.result.kakao.KakaoTokenAndIdResult;
-import com.aetheri.application.result.kakao.KakaoTokenResult;
+import com.aetheri.application.result.kakao.KakaoIssueTokenResult;
 import com.aetheri.application.result.kakao.SignInResult;
 import com.aetheri.application.result.jwt.RefreshTokenIssueResult;
 import com.aetheri.application.port.in.sign.SignInUseCase;
@@ -119,7 +119,7 @@ public class SignInService implements SignInUseCase {
      * @return 카카오의 토큰 응답({@code KakaoTokenResponse})을 발행하는 {@code Mono}입니다.
      * @throws BusinessException 카카오 API에서 토큰을 가져오지 못했다면 {@code NOT_FOUND_ACCESS_TOKEN} 예외를 발생시킵니다.
      */
-    private Mono<KakaoTokenResult> getKakaoToken(String code) {
+    private Mono<KakaoIssueTokenResult> getKakaoToken(String code) {
         return kakaoGetAccessTokenPort.tokenRequest(code)
                 .switchIfEmpty(Mono.error(new BusinessException(
                         ErrorMessage.NOT_FOUND_ACCESS_TOKEN,
@@ -135,7 +135,7 @@ public class SignInService implements SignInUseCase {
      * @return 카카오 토큰 정보와 사용자 ID/이름을 담은 {@code KakaoTokenAndId}를 발행하는 {@code Mono}입니다.
      * @throws BusinessException 사용자 정보를 조회하지 못했다면 {@code NOT_FOUND_RUNNER} 예외를 발생시킵니다.
      */
-    private Mono<KakaoTokenAndIdResult> getUserInfo(KakaoTokenResult dto) {
+    private Mono<KakaoTokenAndIdResult> getUserInfo(KakaoIssueTokenResult dto) {
         return kakaoUserInformationInquiryPort.userInformationInquiry(dto.accessToken())
                 .switchIfEmpty(Mono.error(new BusinessException(
                         ErrorMessage.NOT_FOUND_RUNNER,
