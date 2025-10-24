@@ -2,6 +2,7 @@ package com.aetheri.application.service.redis.refreshtoken;
 
 import com.aetheri.application.command.jwt.RefreshTokenIssueResult;
 import com.aetheri.application.command.jwt.TokenResult;
+import com.aetheri.application.port.in.redis.RefreshTokenUseCase;
 import com.aetheri.application.port.out.jwt.JwtTokenProviderPort;
 import com.aetheri.application.port.out.jwt.JwtTokenResolverPort;
 import com.aetheri.application.port.out.redis.RedisRefreshTokenRepositoryPort;
@@ -24,7 +25,7 @@ import reactor.core.scheduler.Schedulers;
  */
 @Service
 @RequiredArgsConstructor
-public class RefreshTokenPort {
+public class RefreshTokenService implements RefreshTokenUseCase {
     private final RedisRefreshTokenRepositoryPort redisRefreshTokenRepositoryPort;
     private final JwtTokenProviderPort jwtTokenProviderPort;
     private final JwtTokenResolverPort jwtTokenResolverPort;
@@ -36,6 +37,7 @@ public class RefreshTokenPort {
      * @return 새로운 액세스 토큰과 리프레시 토큰 정보를 담은 {@code TokenResponse}를 발행하는 {@code Mono}입니다.
      * @throws BusinessException Redis에서 해당 사용자의 리프레시 토큰을 찾을 수 없을 때 발생합니다.
      */
+    @Override
     public Mono<TokenResult> refreshToken(Long runnerId) {
         // Redis에서 리프레시 토큰을 찾습니다.
         return findRefreshTokenFromRedis(runnerId)
@@ -49,6 +51,7 @@ public class RefreshTokenPort {
      * @param refreshToken 재발급에 사용될 리프레시 토큰 문자열입니다.
      * @return 새로운 토큰 정보를 담은 {@code TokenResponse}를 발행하는 {@code Mono}입니다.
      */
+    @Override
     public Mono<TokenResult> reissueTokens(String refreshToken) {
         // 리프레시 토큰에서 사용자 ID를 추출합니다. (블로킹 작업을 반응형으로 감싸 처리)
         return extractRunnerIdReactive(refreshToken)
