@@ -1,4 +1,4 @@
-package com.aetheri.application.port.out.image;
+package com.aetheri.application.port.out.imagemetadata;
 
 import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataSaveRequest;
 import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataUpdateRequest;
@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono;
 /**
  * 이미지 메타데이터를 데이터베이스에서 조작하기 위한 포트
  */
-public interface ImageRepositoryPort {
+public interface ImageMetadataRepositoryPort {
     /**
      * 새로운 이미지 메타데이터를 저장합니다.
      * <p>

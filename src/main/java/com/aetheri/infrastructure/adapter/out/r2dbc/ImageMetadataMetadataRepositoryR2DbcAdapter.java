@@ -2,7 +2,7 @@ package com.aetheri.infrastructure.adapter.out.r2dbc;
 
 import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataSaveRequest;
 import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataUpdateRequest;
-import com.aetheri.application.port.out.image.ImageRepositoryPort;
+import com.aetheri.application.port.out.imagemetadata.ImageMetadataRepositoryPort;
 import com.aetheri.infrastructure.persistence.repository.ImageMetadataR2dbcRepository;
 import com.aetheri.infrastructure.persistence.entity.ImageMetadata;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
@@ -17,14 +17,14 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 /**
- * 이미지 메타데이터 관리 포트({@link ImageRepositoryPort})의 R2DBC 기반 구현체입니다.
+ * 이미지 메타데이터 관리 포트({@link ImageMetadataRepositoryPort})의 R2DBC 기반 구현체입니다.
  * 이 어댑터는 {@code ImageMetadata} 엔티티에 대한 CRUD 작업을 수행하며,
  * 복잡한 쿼리에는 {@link R2dbcEntityTemplate}를 사용하고 단순 작업에는 {@link ImageMetadataR2dbcRepository}를 사용합니다.
  *
  * <p>모든 데이터베이스 작업은 비동기/논블로킹 방식으로 {@code Mono} 또는 {@code Flux}를 반환합니다.</p>
  */
 @Repository
-public class ImageMetadataRepositoryR2dbcAdapter implements ImageRepositoryPort {
+public class ImageMetadataMetadataRepositoryR2DbcAdapter implements ImageMetadataRepositoryPort {
     private final ImageMetadataR2dbcRepository imageMetadataR2DbcRepository;
     private final R2dbcEntityTemplate r2dbcEntityTemplate;
 
@@ -34,7 +34,7 @@ public class ImageMetadataRepositoryR2dbcAdapter implements ImageRepositoryPort 
      * @param imageMetadataR2DbcRepository Spring Data R2DBC 리포지토리입니다.
      * @param r2dbcEntityTemplate 동적인 쿼리 및 업데이트를 위한 템플릿입니다.
      */
-    public ImageMetadataRepositoryR2dbcAdapter(
+    public ImageMetadataMetadataRepositoryR2DbcAdapter(
             ImageMetadataR2dbcRepository imageMetadataR2DbcRepository,
             R2dbcEntityTemplate r2dbcEntityTemplate
     ) {

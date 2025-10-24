@@ -2,7 +2,7 @@ package com.aetheri.application.service.imagemetadata;
 
 import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataResponse;
 import com.aetheri.application.port.in.imagemetadata.FindImageMetadataUseCase;
-import com.aetheri.application.port.out.image.ImageRepositoryPort;
+import com.aetheri.application.port.out.imagemetadata.ImageMetadataRepositoryPort;
 import com.aetheri.domain.exception.BusinessException;
 import com.aetheri.domain.exception.message.ErrorMessage;
 import com.aetheri.infrastructure.persistence.entity.ImageMetadata;
@@ -17,13 +17,13 @@ import reactor.core.publisher.Mono;
  * 이 클래스는 이미지 ID 또는 사용자 ID를 기반으로 메타데이터를 검색하고, 접근 권한을 확인하는 비즈니스 로직을 수행합니다.
  *
  * @see FindImageMetadataUseCase 구현하는 유즈케이스 인터페이스
- * @see ImageRepositoryPort 데이터베이스 접근을 위한 아웃고잉 포트
+ * @see ImageMetadataRepositoryPort 데이터베이스 접근을 위한 아웃고잉 포트
  */
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class FindImageMetadataPort implements FindImageMetadataUseCase {
-    private final ImageRepositoryPort imageRepositoryPort;
+    private final ImageMetadataRepositoryPort imageMetadataRepositoryPort;
 
     /**
      * 요청 사용자({@code runnerId})가 소유하거나 접근 권한이 있는 이미지 메타데이터를 ID로 조회합니다.
@@ -40,7 +40,7 @@ public class FindImageMetadataPort implements FindImageMetadataUseCase {
      */
     @Override
     public Mono<ImageMetadataResponse> findImageMetadataById(Long runnerId, Long imageId) {
-        return imageRepositoryPort.findById(imageId)
+        return imageMetadataRepositoryPort.findById(imageId)
                 .switchIfEmpty(Mono.error(new BusinessException(ErrorMessage.NOT_FOUND_IMAGE_METADATA, "이미지를 찾을 수 없습니다.")))
                 .flatMap(imageMetadata -> {
                     log.info("[FindImageMetadataMetadataService] 사용자 {}가 이미지 {}를 조회했습니다.", runnerId, imageId);
@@ -70,7 +70,7 @@ public class FindImageMetadataPort implements FindImageMetadataUseCase {
      */
     @Override
     public Mono<ImageMetadataResponse> findImageMetadataById(Long imageId) {
-        return imageRepositoryPort.findById(imageId)
+        return imageMetadataRepositoryPort.findById(imageId)
                 .switchIfEmpty(Mono.error(new BusinessException(ErrorMessage.NOT_FOUND_IMAGE_METADATA, "이미지를 찾을 수 없습니다.")))
                 .flatMap(imageMetadata -> {
                     log.info("[FindImageMetadataMetadataService] 이미지 {}를 조회했습니다.", imageId);
@@ -95,7 +95,7 @@ public class FindImageMetadataPort implements FindImageMetadataUseCase {
      */
     @Override
     public Flux<ImageMetadataResponse> findImageMetadataByRunnerId(Long runnerId) {
-        return imageRepositoryPort.findByRunnerId(runnerId).map(ImageMetadata::toResponse)
+        return imageMetadataRepositoryPort.findByRunnerId(runnerId).map(ImageMetadata::toResponse)
                 .doOnComplete(() -> log.info("[FindImageMetadataMetadataService] 사용자 {}의 이미지를 조회했습니다.", runnerId));
     }
 }

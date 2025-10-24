@@ -2,7 +2,7 @@ package com.aetheri.application.service.imagemetadata;
 
 import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataUpdateRequest;
 import com.aetheri.application.port.in.imagemetadata.UpdateImageMetadataUseCase;
-import com.aetheri.application.port.out.image.ImageRepositoryPort;
+import com.aetheri.application.port.out.imagemetadata.ImageMetadataRepositoryPort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -13,13 +13,13 @@ import reactor.core.publisher.Mono;
  * 이 클래스는 특정 사용자의 요청에 따라 기존 이미지 메타데이터를 업데이트하는 비즈니스 로직을 수행합니다.
  *
  * @see UpdateImageMetadataUseCase 구현하는 유즈케이스 인터페이스
- * @see ImageRepositoryPort 데이터베이스 접근을 위한 아웃고잉 포트
+ * @see ImageMetadataRepositoryPort 데이터베이스 접근을 위한 아웃고잉 포트
  */
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class UpdateImageMetadataPort implements UpdateImageMetadataUseCase {
-    private final ImageRepositoryPort imageRepositoryPort;
+    private final ImageMetadataRepositoryPort imageMetadataRepositoryPort;
 
     /**
      * 주어진 사용자를 대신하여 기존 이미지의 메타데이터를 수정합니다.
@@ -35,7 +35,7 @@ public class UpdateImageMetadataPort implements UpdateImageMetadataUseCase {
      */
     @Override
     public Mono<Void> updateImageMetadata(Long runnerId, Long imageId, ImageMetadataUpdateRequest request) {
-        return imageRepositoryPort.updateImageMetadata(runnerId, imageId, request)
+        return imageMetadataRepositoryPort.updateImageMetadata(runnerId, imageId, request)
                 .doOnSuccess(l -> log.info("[UpdateImageMetadataService] 사용자 {}가 이미지 {}의 메타데이터를 수정했습니다. 바뀐 행: {}", runnerId, imageId, l))
                 .then();
     }

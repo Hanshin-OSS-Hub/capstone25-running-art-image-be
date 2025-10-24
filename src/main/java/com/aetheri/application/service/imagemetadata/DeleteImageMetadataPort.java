@@ -1,7 +1,7 @@
 package com.aetheri.application.service.imagemetadata;
 
 import com.aetheri.application.port.in.imagemetadata.DeleteImageMetadataUseCase;
-import com.aetheri.application.port.out.image.ImageRepositoryPort;
+import com.aetheri.application.port.out.imagemetadata.ImageMetadataRepositoryPort;
 import com.aetheri.domain.exception.BusinessException;
 import com.aetheri.domain.exception.message.ErrorMessage;
 import lombok.RequiredArgsConstructor;
@@ -14,13 +14,13 @@ import reactor.core.publisher.Mono;
  * 이 클래스는 특정 사용자의 요청에 따라 이미지 메타데이터를 데이터베이스에서 삭제하는 비즈니스 로직을 수행합니다.
  *
  * @see DeleteImageMetadataUseCase 구현하는 유즈케이스 인터페이스
- * @see ImageRepositoryPort 데이터베이스 접근을 위한 아웃고잉 포트
+ * @see ImageMetadataRepositoryPort 데이터베이스 접근을 위한 아웃고잉 포트
  */
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class DeleteImageMetadataPort implements DeleteImageMetadataUseCase {
-    private final ImageRepositoryPort imageRepositoryPort;
+    private final ImageMetadataRepositoryPort imageMetadataRepositoryPort;
 
     /**
      * 지정된 사용자({@code runnerId})가 소유한 이미지 메타데이터를 삭제합니다.
@@ -38,7 +38,7 @@ public class DeleteImageMetadataPort implements DeleteImageMetadataUseCase {
      */
     @Override
     public Mono<Void> deleteImageMetadata(Long runnerId, Long imageId) {
-        return imageRepositoryPort.deleteById(runnerId, imageId)
+        return imageMetadataRepositoryPort.deleteById(runnerId, imageId)
                 .flatMap(deletedCount -> {
                     if (deletedCount == 0) {
                         return Mono.error(new BusinessException(

@@ -2,7 +2,7 @@ package com.aetheri.application.service.imagemetadata;
 
 import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataSaveRequest;
 import com.aetheri.application.port.in.imagemetadata.SaveImageMetadataUseCase;
-import com.aetheri.application.port.out.image.ImageRepositoryPort;
+import com.aetheri.application.port.out.imagemetadata.ImageMetadataRepositoryPort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -13,13 +13,13 @@ import reactor.core.publisher.Mono;
  * 이 클래스는 특정 사용자를 대신하여 요청된 이미지 메타데이터를 데이터베이스에 영속화하는 비즈니스 로직을 수행합니다.
  *
  * @see SaveImageMetadataUseCase 구현하는 유즈케이스 인터페이스
- * @see ImageRepositoryPort 데이터베이스 접근을 위한 아웃고잉 포트
+ * @see ImageMetadataRepositoryPort 데이터베이스 접근을 위한 아웃고잉 포트
  */
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class SaveImageMetadataPort implements SaveImageMetadataUseCase {
-    private final ImageRepositoryPort imageRepositoryPort;
+    private final ImageMetadataRepositoryPort imageMetadataRepositoryPort;
 
     /**
      * 주어진 사용자({@code runnerId})를 대신하여 이미지 메타데이터를 영속화(저장)합니다.
@@ -35,7 +35,7 @@ public class SaveImageMetadataPort implements SaveImageMetadataUseCase {
      */
     @Override
     public Mono<Void> saveImageMetadata(Long runnerId, ImageMetadataSaveRequest request) {
-        return imageRepositoryPort.saveImageMetadata(runnerId, request)
+        return imageMetadataRepositoryPort.saveImageMetadata(runnerId, request)
                 .doOnSuccess(l -> log.info("[SaveImageMetadataService] 사용자 {}가 이미지 {}를 생성했습니다.", runnerId, l))
                 .then();
     }
