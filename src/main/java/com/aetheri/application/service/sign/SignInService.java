@@ -1,5 +1,6 @@
 package com.aetheri.application.service.sign;
 
+import com.aetheri.application.result.kakao.KakaoTokenAndIdResult;
 import com.aetheri.application.result.kakao.KakaoTokenResult;
 import com.aetheri.application.result.kakao.SignInResult;
 import com.aetheri.application.result.jwt.RefreshTokenIssueResult;
@@ -134,7 +135,7 @@ public class SignInService implements SignInUseCase {
      * @return 카카오 토큰 정보와 사용자 ID/이름을 담은 {@code KakaoTokenAndId}를 발행하는 {@code Mono}입니다.
      * @throws BusinessException 사용자 정보를 조회하지 못했다면 {@code NOT_FOUND_RUNNER} 예외를 발생시킵니다.
      */
-    private Mono<KakaoTokenAndId> getUserInfo(KakaoTokenResult dto) {
+    private Mono<KakaoTokenAndIdResult> getUserInfo(KakaoTokenResult dto) {
         return kakaoUserInformationInquiryPort.userInformationInquiry(dto.accessToken())
                 .switchIfEmpty(Mono.error(new BusinessException(
                         ErrorMessage.NOT_FOUND_RUNNER,
@@ -153,7 +154,7 @@ public class SignInService implements SignInUseCase {
                                 var nick = (profile != null) ? profile.nickName() : null;
                                 return (nick != null && !nick.isBlank()) ? nick : ("runner-" + userInfo.id());
                             });
-                    return new KakaoTokenAndId(dto.accessToken(), dto.refreshToken(), userInfo.id(), name);
+                    return new KakaoTokenAndIdResult(dto.accessToken(), dto.refreshToken(), userInfo.id(), name);
                 });
     }
 
@@ -164,7 +165,7 @@ public class SignInService implements SignInUseCase {
      * @param dto 카카오 토큰 정보와 사용자 ID, 이름이 담긴 DTO입니다.
      * @return 시스템 ID로 갱신된 {@code KakaoTokenAndId}를 발행하는 {@code Mono}입니다.
      */
-    private Mono<KakaoTokenAndId> findOrSignUpRunner(KakaoTokenAndId dto) {
+    private Mono<KakaoTokenAndIdResult> findOrSignUpRunner(KakaoTokenAndIdResult dto) {
         return runnerRepositoryPort.existsByKakaoId(dto.id())
                 .flatMap(exists -> exists ?
                         // 1. 사용자 존재 시: 사용자 정보 조회 (로그인)
@@ -172,7 +173,7 @@ public class SignInService implements SignInUseCase {
                         // 2. 사용자 미존재 시: 회원가입 수행 후 사용자 정보 조회
                         signUpService.signUp(dto.id(), dto.name())
                                 .then(runnerRepositoryPort.findByKakaoId(dto.id()))
-                ).map(runner -> new KakaoTokenAndId(
+                ).map(runner -> new KakaoTokenAndIdResult(
                         dto.accessToken(),
                         dto.refreshToken(),
                         runner.getId(), // 시스템 DB의 runner ID로 갱신
@@ -186,28 +187,13 @@ public class SignInService implements SignInUseCase {
      * @param dto 카카오 토큰과 사용자 ID가 담긴 DTO입니다.
      * @return 저장/갱신에 성공하면 해당 사용자의 시스템 ID를 발행하는 {@code Mono<Long>}입니다.
      */
-    private Mono<Long> saveKakaoToken(KakaoTokenAndId dto) {
+    private Mono<Long> saveKakaoToken(KakaoTokenAndIdResult dto) {
         return kakaoTokenRepositoryPort.save(
                         dto.id(),
                         dto.accessToken(),
                         dto.refreshToken()
                 )
                 .thenReturn(dto.id());
-    }
-
-    /**
-     * 이 서비스 내부에서만 사용하는 카카오 토큰과 사용자 ID를 운반하기 위한 DTO
-     */
-    private record KakaoTokenAndId(
-            // 카카오에서 발급한 액세스 토큰
-            String accessToken,
-            // 카카오에서 발급한 리프레시 토큰
-            String refreshToken,
-            // 사용자의 시스템 ID (로그인 후 갱신됨)
-            Long id,
-            // 사용자의 닉네임
-            String name
-    ) {
     }
 
     /**
