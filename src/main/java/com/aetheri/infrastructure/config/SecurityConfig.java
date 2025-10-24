@@ -1,6 +1,6 @@
 package com.aetheri.infrastructure.config;
 
-import com.aetheri.application.port.in.redis.RefreshTokenUseCase;
+import com.aetheri.application.port.in.token.RefreshTokenUseCase;
 import com.aetheri.application.port.out.jwt.JwtTokenResolverPort;
 import com.aetheri.application.port.out.jwt.JwtTokenValidatorPort;
 import com.aetheri.infrastructure.adapter.in.jwt.JwtAuthenticationFilter;

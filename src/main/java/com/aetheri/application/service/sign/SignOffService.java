@@ -6,7 +6,7 @@ import com.aetheri.application.port.out.kakao.KakaoRefreshTokenPort;
 import com.aetheri.application.port.out.kakao.KakaoUnlinkPort;
 import com.aetheri.application.port.out.r2dbc.KakaoTokenRepositoryPort;
 import com.aetheri.application.port.out.r2dbc.RunnerRepositoryPort;
-import com.aetheri.application.port.out.redis.RedisRefreshTokenRepositoryPort;
+import com.aetheri.application.port.out.token.RedisRefreshTokenRepositoryPort;
 import com.aetheri.domain.exception.BusinessException;
 import com.aetheri.domain.exception.message.ErrorMessage;
 import com.aetheri.infrastructure.persistence.entity.KakaoToken;

@@ -1,11 +1,11 @@
-package com.aetheri.application.service.redis.refreshtoken;
+package com.aetheri.application.service.token;
 
 import com.aetheri.application.result.jwt.RefreshTokenIssueResult;
 import com.aetheri.application.result.jwt.TokenResult;
-import com.aetheri.application.port.in.redis.RefreshTokenUseCase;
+import com.aetheri.application.port.in.token.RefreshTokenUseCase;
 import com.aetheri.application.port.out.jwt.JwtTokenProviderPort;
 import com.aetheri.application.port.out.jwt.JwtTokenResolverPort;
-import com.aetheri.application.port.out.redis.RedisRefreshTokenRepositoryPort;
+import com.aetheri.application.port.out.token.RedisRefreshTokenRepositoryPort;
 import com.aetheri.application.service.converter.AuthenticationConverter;
 import com.aetheri.domain.exception.BusinessException;
 import com.aetheri.domain.exception.message.ErrorMessage;

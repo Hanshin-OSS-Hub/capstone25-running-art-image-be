@@ -10,7 +10,7 @@ import com.aetheri.application.port.out.kakao.KakaoGetAccessTokenPort;
 import com.aetheri.application.port.out.kakao.KakaoUserInformationInquiryPort;
 import com.aetheri.application.port.out.r2dbc.KakaoTokenRepositoryPort;
 import com.aetheri.application.port.out.r2dbc.RunnerRepositoryPort;
-import com.aetheri.application.port.out.redis.RedisRefreshTokenRepositoryPort;
+import com.aetheri.application.port.out.token.RedisRefreshTokenRepositoryPort;
 import com.aetheri.application.service.converter.AuthenticationConverter;
 import com.aetheri.domain.exception.BusinessException;
 import com.aetheri.domain.exception.message.ErrorMessage;

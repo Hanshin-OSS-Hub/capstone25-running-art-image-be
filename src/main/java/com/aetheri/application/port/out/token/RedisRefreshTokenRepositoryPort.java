@@ -1,4 +1,4 @@
-package com.aetheri.application.port.out.redis;
+package com.aetheri.application.port.out.token;
 
 import com.aetheri.infrastructure.adapter.out.redis.RedisRefreshTokenAdapter;
 import reactor.core.publisher.Mono;
