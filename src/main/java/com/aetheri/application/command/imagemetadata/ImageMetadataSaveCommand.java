@@ -1,4 +1,4 @@
-package com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata;
+package com.aetheri.application.command.imagemetadata;
 
 import com.aetheri.domain.enums.image.Proficiency;
 import com.aetheri.domain.enums.image.Shape;
@@ -15,7 +15,7 @@ import jakarta.validation.constraints.NotNull;
  * @param proficiency 이미지에 담긴 대상의 숙련도 또는 난이도를 나타내는 열거형(Enum) 값입니다.
  * @param shape 이미지에 담긴 대상의 형태를 나타내는 열거형(Enum) 값입니다.
  */
-public record ImageMetadataSaveRequest(
+public record ImageMetadataSaveCommand(
         @NotNull
         @Schema(
                 description = "런닝 아트가 생성된 위치",

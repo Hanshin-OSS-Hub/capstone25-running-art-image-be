@@ -1,6 +1,6 @@
 package com.aetheri.application.service.imagemetadata;
 
-import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataSaveRequest;
+import com.aetheri.application.command.imagemetadata.ImageMetadataSaveCommand;
 import com.aetheri.application.port.in.imagemetadata.SaveImageMetadataUseCase;
 import com.aetheri.application.port.out.imagemetadata.ImageMetadataRepositoryPort;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +34,7 @@ public class SaveImageMetadataService implements SaveImageMetadataUseCase {
      * @return 메타데이터 영속화(저장) 작업이 완료되었을 때 종료되는 {@code Mono<Void>} 객체입니다.
      */
     @Override
-    public Mono<Void> saveImageMetadata(Long runnerId, ImageMetadataSaveRequest request) {
+    public Mono<Void> saveImageMetadata(Long runnerId, ImageMetadataSaveCommand request) {
         return imageMetadataRepositoryPort.saveImageMetadata(runnerId, request)
                 .doOnSuccess(l -> log.info("[SaveImageMetadataService] 사용자 {}가 이미지 {}를 생성했습니다.", runnerId, l))
                 .then();

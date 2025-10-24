@@ -1,7 +1,7 @@
 package com.aetheri.application.port.out.imagemetadata;
 
-import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataSaveRequest;
-import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataUpdateRequest;
+import com.aetheri.application.command.imagemetadata.ImageMetadataSaveCommand;
+import com.aetheri.application.command.imagemetadata.ImageMetadataUpdateCommand;
 import com.aetheri.infrastructure.persistence.entity.ImageMetadata;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -19,7 +19,7 @@ public interface ImageMetadataRepositoryPort {
      * @param dto 이미지 메타데이터를 생성하는 데 필요한 필드를 포함하는 DTO
      * @return 영속화가 완료될 때 생성된 이미지 메타데이터 ID를 방출하는 Mono
      */
-    Mono<Long> saveImageMetadata(Long runnerId, ImageMetadataSaveRequest dto);
+    Mono<Long> saveImageMetadata(Long runnerId, ImageMetadataSaveCommand dto);
 
     /**
      * 이미지 식별자를 통해 이미지 메타데이터를 검색합니다.
@@ -47,7 +47,7 @@ public interface ImageMetadataRepositoryPort {
      * @param request 수정할 필드를 포함하는 업데이트 페이로드
      * @return 업데이트된 레코드 수(일치하는 레코드가 발견되지 않은 경우 0)를 방출하는 Mono
      */
-    Mono<Long> updateImageMetadata(Long runnerId, Long imageId, ImageMetadataUpdateRequest request);
+    Mono<Long> updateImageMetadata(Long runnerId, Long imageId, ImageMetadataUpdateCommand request);
 
     /**
      * 주어진 이미지 ID에 대해 이미지 메타데이터가 존재하는지 확인합니다.

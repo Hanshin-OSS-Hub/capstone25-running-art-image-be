@@ -1,4 +1,4 @@
-package com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata;
+package com.aetheri.application.command.imagemetadata;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
@@ -12,7 +12,7 @@ import jakarta.validation.constraints.NotNull;
  * @param title 이미지의 새로운 제목입니다.
  * @param description 이미지에 대한 새로운 간략한 설명입니다.
  */
-public record ImageMetadataUpdateRequest(
+public record ImageMetadataUpdateCommand(
         @NotNull
         @Schema(
                 description = "이미지의 새로운 제목. 이 값은 필수로 제공되어야 합니다.",

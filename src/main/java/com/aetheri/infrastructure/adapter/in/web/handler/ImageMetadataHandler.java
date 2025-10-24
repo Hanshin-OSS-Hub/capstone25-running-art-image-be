@@ -1,8 +1,8 @@
 package com.aetheri.infrastructure.adapter.in.web.handler;
 
 import com.aetheri.application.result.imagemetadata.ImageMetadataResult;
-import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataSaveRequest;
-import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataUpdateRequest;
+import com.aetheri.application.command.imagemetadata.ImageMetadataSaveCommand;
+import com.aetheri.application.command.imagemetadata.ImageMetadataUpdateCommand;
 import com.aetheri.application.port.in.imagemetadata.DeleteImageMetadataUseCase;
 import com.aetheri.application.port.in.imagemetadata.FindImageMetadataUseCase;
 import com.aetheri.application.port.in.imagemetadata.SaveImageMetadataUseCase;
@@ -106,7 +106,7 @@ public class ImageMetadataHandler {
                 // 인증 정보가 없으면 예외 발생
                 .switchIfEmpty(Mono.error(new BusinessException(ErrorMessage.FORBIDDEN, "유효한 인증 없이 접근할 수 없습니다.")))
                 .flatMap(requestId ->
-                        request.bodyToMono(ImageMetadataSaveRequest.class)
+                        request.bodyToMono(ImageMetadataSaveCommand.class)
                                 .flatMap(dto -> saveImageMetadataUseCase.saveImageMetadata(requestId, dto))
                 )
                 .then(ServerResponse.ok().bodyValue(null));
@@ -144,7 +144,7 @@ public class ImageMetadataHandler {
                 // 인증 정보가 없으면 예외 발생
                 .switchIfEmpty(Mono.error(new BusinessException(ErrorMessage.FORBIDDEN, "유효한 인증 없이 접근할 수 없습니다.")))
                 .flatMap(runnerId ->
-                        request.bodyToMono(ImageMetadataUpdateRequest.class)
+                        request.bodyToMono(ImageMetadataUpdateCommand.class)
                                 .flatMap(dto -> updateImageMetadataUseCase.updateImageMetadata(runnerId, imageId, dto))
                 )
                 .then(ServerResponse.ok().build());

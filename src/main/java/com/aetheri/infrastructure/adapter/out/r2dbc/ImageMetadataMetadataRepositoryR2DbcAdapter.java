@@ -1,7 +1,7 @@
 package com.aetheri.infrastructure.adapter.out.r2dbc;
 
-import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataSaveRequest;
-import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataUpdateRequest;
+import com.aetheri.application.command.imagemetadata.ImageMetadataSaveCommand;
+import com.aetheri.application.command.imagemetadata.ImageMetadataUpdateCommand;
 import com.aetheri.application.port.out.imagemetadata.ImageMetadataRepositoryPort;
 import com.aetheri.infrastructure.persistence.repository.ImageMetadataR2dbcRepository;
 import com.aetheri.infrastructure.persistence.entity.ImageMetadata;
@@ -49,7 +49,7 @@ public class ImageMetadataMetadataRepositoryR2DbcAdapter implements ImageMetadat
      * @param request 등록할 이미지의 메타데이터를 가진 DTO입니다.
      * @return 생성이 성공하면 저장된 이미지 메타데이터의 고유 ID({@code Long})를 발행하는 {@code Mono}입니다.
      */
-    public Mono<Long> saveImageMetadata(Long runnerId, ImageMetadataSaveRequest request) {
+    public Mono<Long> saveImageMetadata(Long runnerId, ImageMetadataSaveCommand request) {
         // 엔티티 생성 시, 고유한 fileKey를 생성하여 사용합니다.
         ImageMetadata entity = ImageMetadata.toEntity(
                 runnerId,
@@ -93,7 +93,7 @@ public class ImageMetadataMetadataRepositoryR2DbcAdapter implements ImageMetadat
      * @return 업데이트된 행의 개수({@code Long})를 발행하는 {@code Mono}입니다.
      * @implNote **소유자({@code runnerId})와 이미지 ID({@code imageId})**를 모두 사용하여 쿼리하여, 해당 이미지의 소유자만 수정할 수 있도록 보장합니다.
      */
-    public Mono<Long> updateImageMetadata(Long runnerId, Long imageId, ImageMetadataUpdateRequest request) {
+    public Mono<Long> updateImageMetadata(Long runnerId, Long imageId, ImageMetadataUpdateCommand request) {
         // 이미지 ID와 사용자 ID를 모두 만족하는 레코드만 선택
         Query query = Query.query(
                 Criteria.where("id").is(imageId)

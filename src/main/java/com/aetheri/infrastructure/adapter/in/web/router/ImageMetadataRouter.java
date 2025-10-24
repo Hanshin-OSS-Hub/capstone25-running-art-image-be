@@ -1,8 +1,8 @@
 package com.aetheri.infrastructure.adapter.in.web.router;
 
 import com.aetheri.application.result.imagemetadata.ImageMetadataResult;
-import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataSaveRequest;
-import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataUpdateRequest;
+import com.aetheri.application.command.imagemetadata.ImageMetadataSaveCommand;
+import com.aetheri.application.command.imagemetadata.ImageMetadataUpdateCommand;
 import com.aetheri.infrastructure.adapter.in.web.handler.ImageMetadataHandler;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -139,7 +139,7 @@ public class ImageMetadataRouter {
                                     required = true,
                                     description = "업데이트할 이미지 메타데이터",
                                     content = @Content(
-                                            schema = @Schema(implementation = ImageMetadataUpdateRequest.class)
+                                            schema = @Schema(implementation = ImageMetadataUpdateCommand.class)
                                     )
                             ),
                             responses = {
@@ -164,7 +164,7 @@ public class ImageMetadataRouter {
                                     required = true,
                                     description = "저장할 이미지 메타데이터",
                                     content = @Content(
-                                            schema = @Schema(implementation = ImageMetadataSaveRequest.class)
+                                            schema = @Schema(implementation = ImageMetadataSaveCommand.class)
                                     )
                             ),
                             responses = {

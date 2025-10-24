@@ -1,6 +1,6 @@
 package com.aetheri.application.service.imagemetadata;
 
-import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataUpdateRequest;
+import com.aetheri.application.command.imagemetadata.ImageMetadataUpdateCommand;
 import com.aetheri.application.port.in.imagemetadata.UpdateImageMetadataUseCase;
 import com.aetheri.application.port.out.imagemetadata.ImageMetadataRepositoryPort;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +34,7 @@ public class UpdateImageMetadataService implements UpdateImageMetadataUseCase {
      * (저장소 호출에서 발생하는 오류는 반환된 {@code Mono}를 통해 전파됩니다.)
      */
     @Override
-    public Mono<Void> updateImageMetadata(Long runnerId, Long imageId, ImageMetadataUpdateRequest request) {
+    public Mono<Void> updateImageMetadata(Long runnerId, Long imageId, ImageMetadataUpdateCommand request) {
         return imageMetadataRepositoryPort.updateImageMetadata(runnerId, imageId, request)
                 .doOnSuccess(l -> log.info("[UpdateImageMetadataService] 사용자 {}가 이미지 {}의 메타데이터를 수정했습니다. 바뀐 행: {}", runnerId, imageId, l))
                 .then();
