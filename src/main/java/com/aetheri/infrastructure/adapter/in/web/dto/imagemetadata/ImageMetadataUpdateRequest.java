@@ -1,4 +1,4 @@
-package com.aetheri.application.dto.image;
+package com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;

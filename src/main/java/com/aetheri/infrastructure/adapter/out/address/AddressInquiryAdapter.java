@@ -1,7 +1,7 @@
 package com.aetheri.infrastructure.adapter.out.address;
 
-import com.aetheri.application.dto.address.request.AddressSearchRequest;
-import com.aetheri.application.dto.address.response.AddressApiResponse;
+import com.aetheri.infrastructure.adapter.out.address.dto.AddressSearchRequest;
+import com.aetheri.infrastructure.adapter.out.address.dto.AddressApiResponse;
 import com.aetheri.application.port.out.address.AddressInquiryPort;
 import com.aetheri.infrastructure.config.properties.AddressVerificationProperties;
 import com.aetheri.infrastructure.handler.WebClientErrorHandler;

@@ -1,4 +1,4 @@
-package com.aetheri.application.dto;
+package com.aetheri.infrastructure.adapter.out.kakao.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

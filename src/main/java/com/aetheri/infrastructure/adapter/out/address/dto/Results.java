@@ -1,4 +1,4 @@
-package com.aetheri.application.dto.address.response;
+package com.aetheri.infrastructure.adapter.out.address.dto;
 
 import java.util.List;
 

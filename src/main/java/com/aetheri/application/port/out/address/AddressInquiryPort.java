@@ -1,6 +1,6 @@
 package com.aetheri.application.port.out.address;
 
-import com.aetheri.application.dto.address.response.AddressApiResponse;
+import com.aetheri.infrastructure.adapter.out.address.dto.AddressApiResponse;
 import reactor.core.publisher.Mono;
 
 /**

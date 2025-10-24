@@ -1,8 +1,8 @@
 package com.aetheri.application.service.sign;
 
-import com.aetheri.application.dto.KakaoTokenResponse;
-import com.aetheri.application.dto.SignInResponse;
-import com.aetheri.application.dto.jwt.RefreshTokenIssueResponse;
+import com.aetheri.infrastructure.adapter.out.kakao.dto.KakaoTokenResponse;
+import com.aetheri.infrastructure.adapter.out.kakao.dto.SignInResponse;
+import com.aetheri.application.command.jwt.RefreshTokenIssueResponse;
 import com.aetheri.application.port.in.sign.SignInUseCase;
 import com.aetheri.application.port.out.jwt.JwtTokenProviderPort;
 import com.aetheri.application.port.out.kakao.KakaoGetAccessTokenPort;

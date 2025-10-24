@@ -1,6 +1,6 @@
-package com.aetheri.application.service;
+package com.aetheri.application.service.me;
 
-import com.aetheri.application.dto.MeResponse;
+import com.aetheri.application.command.me.MeResponse;
 import com.aetheri.application.port.out.r2dbc.RunnerRepositoryPort;
 import com.aetheri.domain.exception.BusinessException;
 import com.aetheri.domain.exception.message.ErrorMessage;
@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
-public class MePort {
+public class MeService {
     private final RunnerRepositoryPort runnerRepositoryPort;
 
     public Mono<MeResponse> me(Long id) {

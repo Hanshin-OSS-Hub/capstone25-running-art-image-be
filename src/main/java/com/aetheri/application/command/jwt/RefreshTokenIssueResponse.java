@@ -1,4 +1,4 @@
-package com.aetheri.application.dto.jwt;
+package com.aetheri.application.command.jwt;
 
 import lombok.AccessLevel;
 import lombok.Builder;

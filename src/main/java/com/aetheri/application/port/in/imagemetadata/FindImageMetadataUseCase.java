@@ -1,6 +1,6 @@
 package com.aetheri.application.port.in.imagemetadata;
 
-import com.aetheri.application.dto.image.ImageMetadataResponse;
+import com.aetheri.infrastructure.adapter.in.web.dto.imagemetadata.ImageMetadataResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 

@@ -1,7 +1,7 @@
 package com.aetheri.application.service.redis.refreshtoken;
 
-import com.aetheri.application.dto.jwt.RefreshTokenIssueResponse;
-import com.aetheri.application.dto.jwt.TokenResponse;
+import com.aetheri.application.command.jwt.RefreshTokenIssueResponse;
+import com.aetheri.application.command.jwt.TokenResponse;
 import com.aetheri.application.port.out.jwt.JwtTokenProviderPort;
 import com.aetheri.application.port.out.jwt.JwtTokenResolverPort;
 import com.aetheri.application.port.out.redis.RedisRefreshTokenRepositoryPort;

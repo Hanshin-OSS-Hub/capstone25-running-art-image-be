@@ -1,4 +1,4 @@
-package com.aetheri.application.dto;
+package com.aetheri.infrastructure.adapter.out.kakao.dto;
 
 /**
  * 회원 탈퇴(Unlink) 성공을 나타내는 응답 레코드입니다.

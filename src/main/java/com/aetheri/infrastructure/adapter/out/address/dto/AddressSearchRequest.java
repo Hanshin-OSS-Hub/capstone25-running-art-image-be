@@ -1,4 +1,4 @@
-package com.aetheri.application.dto.address.request;
+package com.aetheri.infrastructure.adapter.out.address.dto;
 
 import lombok.Builder;
 
