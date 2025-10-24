@@ -1,8 +1,6 @@
 package com.aetheri.infrastructure.adapter.in.web.handler;
 
 import com.aetheri.application.result.imagemetadata.ImageMetadataResult;
-import com.aetheri.application.command.imagemetadata.ImageMetadataSaveCommand;
-import com.aetheri.application.command.imagemetadata.ImageMetadataUpdateCommand;
 import com.aetheri.application.port.in.imagemetadata.DeleteImageMetadataUseCase;
 import com.aetheri.application.port.in.imagemetadata.FindImageMetadataUseCase;
 import com.aetheri.application.port.in.imagemetadata.SaveImageMetadataUseCase;
@@ -10,6 +8,9 @@ import com.aetheri.application.port.in.imagemetadata.UpdateImageMetadataUseCase;
 import com.aetheri.application.util.AuthenticationUtils;
 import com.aetheri.domain.exception.BusinessException;
 import com.aetheri.domain.exception.message.ErrorMessage;
+import com.aetheri.infrastructure.adapter.in.web.dto.in.ImageMetadataSaveRequest;
+import com.aetheri.infrastructure.adapter.in.web.dto.in.ImageMetadataUpdateRequest;
+import com.aetheri.infrastructure.adapter.in.web.dto.out.ImageMetadataResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ResolvableType;
@@ -61,6 +62,7 @@ public class ImageMetadataHandler {
                 .flatMap(runnerId -> findImageMetadataUseCase.findImageMetadataById(runnerId, imageId))
                 // 2. 만약 사용자 소유가 아닌 경우, 공개된 이미지인지 확인 (공개된 이미지만 조회)
                 .switchIfEmpty(findImageMetadataUseCase.findImageMetadataById(imageId))
+                .map(ImageMetadataResponse::toResponse)
                 .flatMap(image -> ServerResponse.ok().bodyValue(image));
     }
 
@@ -76,6 +78,7 @@ public class ImageMetadataHandler {
         // 1. 인증된 사용자 ID 추출 및 해당 ID의 이미지 메타데이터를 Flux로 조회
         return AuthenticationUtils.extractRunnerIdFromRequest(request)
                 .flatMapMany(findImageMetadataUseCase::findImageMetadataByRunnerId)
+                .map(ImageMetadataResponse::toResponse)
                 // 2. 각 ImageMetadataResponse 객체를 DataBuffer (JSON)로 인코딩
                 .flatMap(response -> jackson2JsonEncoder.encode(
                                 Flux.just(response),
@@ -106,8 +109,8 @@ public class ImageMetadataHandler {
                 // 인증 정보가 없으면 예외 발생
                 .switchIfEmpty(Mono.error(new BusinessException(ErrorMessage.FORBIDDEN, "유효한 인증 없이 접근할 수 없습니다.")))
                 .flatMap(requestId ->
-                        request.bodyToMono(ImageMetadataSaveCommand.class)
-                                .flatMap(dto -> saveImageMetadataUseCase.saveImageMetadata(requestId, dto))
+                        request.bodyToMono(ImageMetadataSaveRequest.class)
+                                .flatMap(body -> saveImageMetadataUseCase.saveImageMetadata(requestId, body.toCommand()))
                 )
                 .then(ServerResponse.ok().bodyValue(null));
     }
@@ -144,8 +147,8 @@ public class ImageMetadataHandler {
                 // 인증 정보가 없으면 예외 발생
                 .switchIfEmpty(Mono.error(new BusinessException(ErrorMessage.FORBIDDEN, "유효한 인증 없이 접근할 수 없습니다.")))
                 .flatMap(runnerId ->
-                        request.bodyToMono(ImageMetadataUpdateCommand.class)
-                                .flatMap(dto -> updateImageMetadataUseCase.updateImageMetadata(runnerId, imageId, dto))
+                        request.bodyToMono(ImageMetadataUpdateRequest.class)
+                                .flatMap(body -> updateImageMetadataUseCase.updateImageMetadata(runnerId, imageId, body.toCommand()))
                 )
                 .then(ServerResponse.ok().build());
     }
