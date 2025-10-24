@@ -3,7 +3,7 @@ package com.aetheri.infrastructure.adapter.in.web.handler;
 import com.aetheri.application.port.in.sign.SignInUseCase;
 import com.aetheri.application.port.in.sign.SignOffUseCase;
 import com.aetheri.application.port.in.sign.SignOutUseCase;
-import com.aetheri.application.util.AuthenticationUtils;
+import com.aetheri.infrastructure.util.AuthenticationUtils;
 import com.aetheri.domain.exception.BusinessException;
 import com.aetheri.domain.exception.message.ErrorMessage;
 import com.aetheri.infrastructure.config.properties.JWTProperties;

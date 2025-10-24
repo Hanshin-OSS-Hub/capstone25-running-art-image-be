@@ -2,7 +2,7 @@ package com.aetheri.infrastructure.adapter.out.kakao;
 
 import com.aetheri.application.result.kakao.UnlinkResult;
 import com.aetheri.application.port.out.kakao.KakaoUnlinkPort;
-import com.aetheri.application.util.ValidationUtils;
+import com.aetheri.infrastructure.util.ValidationUtils;
 import com.aetheri.domain.exception.message.ErrorMessage;
 import com.aetheri.infrastructure.handler.WebClientErrorHandler;
 import org.springframework.beans.factory.annotation.Qualifier;

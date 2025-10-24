@@ -1,4 +1,4 @@
-package com.aetheri.application.util;
+package com.aetheri.infrastructure.util;
 
 import com.aetheri.domain.exception.BusinessException;
 import com.aetheri.domain.exception.message.ErrorMessage;

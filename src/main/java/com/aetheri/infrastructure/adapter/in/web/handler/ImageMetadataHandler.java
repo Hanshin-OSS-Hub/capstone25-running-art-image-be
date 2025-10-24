@@ -5,7 +5,7 @@ import com.aetheri.application.port.in.imagemetadata.DeleteImageMetadataUseCase;
 import com.aetheri.application.port.in.imagemetadata.FindImageMetadataUseCase;
 import com.aetheri.application.port.in.imagemetadata.SaveImageMetadataUseCase;
 import com.aetheri.application.port.in.imagemetadata.UpdateImageMetadataUseCase;
-import com.aetheri.application.util.AuthenticationUtils;
+import com.aetheri.infrastructure.util.AuthenticationUtils;
 import com.aetheri.domain.exception.BusinessException;
 import com.aetheri.domain.exception.message.ErrorMessage;
 import com.aetheri.infrastructure.adapter.in.web.dto.in.ImageMetadataSaveRequest;
