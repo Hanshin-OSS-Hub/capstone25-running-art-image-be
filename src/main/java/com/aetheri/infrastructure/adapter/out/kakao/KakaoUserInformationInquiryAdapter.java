@@ -4,7 +4,7 @@ import com.aetheri.application.port.out.kakao.KakaoUserInformationInquiryPort;
 import com.aetheri.domain.exception.BusinessException;
 import com.aetheri.domain.exception.message.ErrorMessage;
 import com.aetheri.infrastructure.handler.WebClientErrorHandler;
-import com.aetheri.interfaces.dto.kakao.KakaoUserInfoResponseDto;
+import com.aetheri.infrastructure.adapter.out.kakao.dto.KakaoUserInfoResponseDto;
 import io.netty.handler.codec.http.HttpHeaderValues;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;

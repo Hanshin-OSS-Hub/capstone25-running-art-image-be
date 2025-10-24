@@ -1,8 +1,7 @@
-package com.aetheri.interfaces.dto.kakao;
+package com.aetheri.infrastructure.adapter.out.kakao.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;

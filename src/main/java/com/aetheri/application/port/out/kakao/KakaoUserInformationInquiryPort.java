@@ -1,7 +1,7 @@
 package com.aetheri.application.port.out.kakao;
 
 import com.aetheri.infrastructure.adapter.out.kakao.KakaoUserInformationInquiryAdapter;
-import com.aetheri.interfaces.dto.kakao.KakaoUserInfoResponseDto;
+import com.aetheri.infrastructure.adapter.out.kakao.dto.KakaoUserInfoResponseDto;
 import reactor.core.publisher.Mono;
 
 /**
