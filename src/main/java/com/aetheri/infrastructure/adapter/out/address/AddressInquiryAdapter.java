@@ -1,5 +1,6 @@
 package com.aetheri.infrastructure.adapter.out.address;
 
+import com.aetheri.application.result.address.AddressApiResult;
 import com.aetheri.infrastructure.adapter.out.address.dto.AddressSearchRequest;
 import com.aetheri.infrastructure.adapter.out.address.dto.AddressApiResponse;
 import com.aetheri.application.port.out.address.AddressInquiryPort;
@@ -31,7 +32,7 @@ public class AddressInquiryAdapter implements AddressInquiryPort {
     }
 
     @Override
-    public Mono<AddressApiResponse> inquiryAddress(String keyword) {
+    public Mono<AddressApiResult> inquiryAddress(String keyword) {
 
         var request = AddressSearchRequest.of(keyword, apiKey);
 
@@ -44,6 +45,7 @@ public class AddressInquiryAdapter implements AddressInquiryPort {
                         .queryParam("resultType", request.resultType())
                         .build()
                 )
-                .exchangeToMono(WebClientErrorHandler.handleErrors(AddressApiResponse.class));
+                .exchangeToMono(WebClientErrorHandler.handleErrors(AddressApiResponse.class))
+                .mapNotNull(AddressApiResponse::toResult);
     }
 }
