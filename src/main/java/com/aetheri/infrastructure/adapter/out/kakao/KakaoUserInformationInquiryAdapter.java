@@ -1,6 +1,7 @@
 package com.aetheri.infrastructure.adapter.out.kakao;
 
 import com.aetheri.application.port.out.kakao.KakaoUserInformationInquiryPort;
+import com.aetheri.application.result.kakao.api.KakaoUserInfoResult;
 import com.aetheri.domain.exception.BusinessException;
 import com.aetheri.domain.exception.message.ErrorMessage;
 import com.aetheri.infrastructure.handler.WebClientErrorHandler;
@@ -41,7 +42,7 @@ public class KakaoUserInformationInquiryAdapter implements KakaoUserInformationI
      * @throws BusinessException 액세스 토큰이 {@code null}이거나 공백일 경우 {@code INVALID_REQUEST_PARAMETER} 예외를 {@code Mono}를 통해 발생시킵니다.
      * @see <a href="https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#req-user-info">카카오 REST API - 사용자 정보 가져오기</a>
      */
-    public Mono<KakaoUserInfoResponseDto> userInformationInquiry(String accessToken) {
+    public Mono<KakaoUserInfoResult> userInformationInquiry(String accessToken) {
         if (accessToken == null || accessToken.isBlank()) {
             return Mono.error(new BusinessException(
                     ErrorMessage.INVALID_REQUEST_PARAMETER,
@@ -58,6 +59,7 @@ public class KakaoUserInformationInquiryAdapter implements KakaoUserInformationI
                 // 카카오 API는 CONTENT_TYPE이 필요하지 않지만, WebClient 설정을 따르기 위해 추가
                 .header(HttpHeaders.CONTENT_TYPE, HttpHeaderValues.APPLICATION_X_WWW_FORM_URLENCODED.toString())
                 // WebClient 응답을 처리하고 오류를 적절히 변환합니다. (KakaoUserInfoResponseDto DTO로 매핑)
-                .exchangeToMono(WebClientErrorHandler.handleErrors(KakaoUserInfoResponseDto.class));
+                .exchangeToMono(WebClientErrorHandler.handleErrors(KakaoUserInfoResponseDto.class))
+                .map(KakaoUserInfoResponseDto::toResult);
     }
 }

@@ -1,6 +1,6 @@
 package com.aetheri.application.port.out.kakao;
 
-import com.aetheri.infrastructure.adapter.out.kakao.dto.KakaoUserInfoResponseDto;
+import com.aetheri.application.result.kakao.api.KakaoUserInfoResult;
 import reactor.core.publisher.Mono;
 
 /**
@@ -20,5 +20,5 @@ public interface KakaoUserInformationInquiryPort {
      * @param accessToken 정보를 조회할 사용자의 유효한 카카오 액세스 토큰 문자열입니다.
      * @return 조회된 카카오 사용자 정보(ID, 프로필 등)를 담은 {@code KakaoUserInfoResponseDto} 객체를 발행하는 {@code Mono}입니다.
      */
-    Mono<KakaoUserInfoResponseDto> userInformationInquiry(String accessToken);
+    Mono<KakaoUserInfoResult> userInformationInquiry(String accessToken);
 }
