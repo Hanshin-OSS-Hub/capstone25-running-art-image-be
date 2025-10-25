@@ -1,5 +1,6 @@
 package com.aetheri.infrastructure.persistence.entity;
 
+import com.aetheri.application.result.runner.RunnerResult;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -45,5 +46,13 @@ public class Runner {
     public Runner(Long kakaoId, String name) {
         this.kakaoId = kakaoId;
         this.name = name;
+    }
+
+    public RunnerResult toResult() {
+        return RunnerResult.builder()
+                .id(id)
+                .kakaoId(kakaoId)
+                .name(name)
+                .build();
     }
 }

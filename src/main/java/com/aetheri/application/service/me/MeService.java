@@ -25,6 +25,6 @@ public class MeService {
                         ErrorMessage.NOT_FOUND_RUNNER,
                         "사용자를 찾을 수 없습니다."))
                 )
-                .map(MeResult::of);
+                .map(entity -> entity.toResult().toMeResult());
     }
 }
