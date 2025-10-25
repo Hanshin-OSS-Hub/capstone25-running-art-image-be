@@ -112,7 +112,7 @@ public class ImageMetadataHandler {
                         request.bodyToMono(ImageMetadataSaveRequest.class)
                                 .flatMap(body -> saveImageMetadataUseCase.saveImageMetadata(requestId, body.toCommand()))
                 )
-                .then(ServerResponse.ok().bodyValue(null));
+                .then(ServerResponse.ok().build());
     }
 
     /**
@@ -129,7 +129,7 @@ public class ImageMetadataHandler {
                 // 인증 정보가 없으면 예외 발생
                 .switchIfEmpty(Mono.error(new BusinessException(ErrorMessage.FORBIDDEN, "유효한 인증 없이 접근할 수 없습니다.")))
                 .flatMap(runnerId -> deleteImageMetadataUseCase.deleteImageMetadata(runnerId, imageId))
-                .then(ServerResponse.ok().bodyValue(null));
+                .then(ServerResponse.ok().build());
     }
 
     /**
