@@ -1,4 +1,4 @@
-package com.aetheri.application.result.kakao;
+package com.aetheri.infrastructure.adapter.out.kakao.dto;
 
 /**
  * 회원 탈퇴(Unlink) 성공을 나타내는 응답 레코드입니다.
@@ -6,5 +6,5 @@ package com.aetheri.application.result.kakao;
  *
  * @param id 탈퇴가 성공적으로 처리된 회원의 고유 식별자(ID)입니다.
  */
-public record UnlinkResult(Long id) {
+public record UnlinkResponse(Long id) {
 }
