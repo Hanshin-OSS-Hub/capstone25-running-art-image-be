@@ -82,7 +82,7 @@ public class ImageMetadataRouter {
                                     @ApiResponse(
                                             responseCode = "200",
                                             description = "이미지 메타데이터 목록이 SSE 형태로 스트리밍됩니다.",
-                                            content = @Content(mediaType = MediaType.TEXT_EVENT_STREAM_VALUE, schema = @Schema(implementation = ImageMetadataResult.class))
+                                            content = @Content(mediaType = MediaType.TEXT_EVENT_STREAM_VALUE, schema = @Schema(implementation = ImageMetadataResponse.class))
                                     ),
                                     @ApiResponse(
                                             responseCode = "401",
