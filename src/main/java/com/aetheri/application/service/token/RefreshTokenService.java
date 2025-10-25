@@ -34,7 +34,7 @@ public class RefreshTokenService implements RefreshTokenUseCase {
      * 사용자의 고유 ID를 사용하여 Redis에서 리프레시 토큰을 조회하고, 이를 기반으로 새로운 토큰을 재발급합니다.
      *
      * @param runnerId 토큰 재발급을 요청한 사용자의 고유 식별자(ID)입니다.
-     * @return 새로운 액세스 토큰과 리프레시 토큰 정보를 담은 {@code TokenResponse}를 발행하는 {@code Mono}입니다.
+     * @return 새로운 액세스 토큰과 리프레시 토큰 정보를 담은 {@code TokenResult}를 발행하는 {@code Mono}입니다.
      * @throws BusinessException Redis에서 해당 사용자의 리프레시 토큰을 찾을 수 없을 때 발생합니다.
      */
     @Override
@@ -49,7 +49,7 @@ public class RefreshTokenService implements RefreshTokenUseCase {
      * 주어진 리프레시 토큰을 해독하고, 사용자 정보를 추출하여 새로운 토큰 쌍을 재발급합니다.
      *
      * @param refreshToken 재발급에 사용될 리프레시 토큰 문자열입니다.
-     * @return 새로운 토큰 정보를 담은 {@code TokenResponse}를 발행하는 {@code Mono}입니다.
+     * @return 새로운 토큰 정보를 담은 {@code TokenResult}를 발행하는 {@code Mono}입니다.
      */
     @Override
     public Mono<TokenResult> reissueTokens(String refreshToken) {
@@ -78,7 +78,7 @@ public class RefreshTokenService implements RefreshTokenUseCase {
      * 기존 리프레시 토큰을 Redis에서 삭제하고 새로운 토큰 쌍을 생성합니다.
      *
      * @param auth 토큰 재발급에 사용될 사용자 인증 정보({@code Authentication})입니다.
-     * @return 새로운 토큰 정보를 담은 {@code TokenResponse}를 발행하는 {@code Mono}입니다.
+     * @return 새로운 토큰 정보를 담은 {@code TokenResult}를 발행하는 {@code Mono}입니다.
      */
     private Mono<TokenResult> deleteOldTokenAndCreateNew(Authentication auth) {
         Long runnerId = Long.valueOf(auth.getName());
@@ -112,7 +112,7 @@ public class RefreshTokenService implements RefreshTokenUseCase {
      *
      * @param authentication 토큰 생성에 사용될 사용자 인증 정보입니다.
      * @param runnerId 토큰을 저장할 사용자의 고유 식별자(ID)입니다.
-     * @return 새로운 토큰 쌍을 담은 {@code TokenResponse}를 발행하는 {@code Mono}입니다.
+     * @return 새로운 토큰 쌍을 담은 {@code TokenResult}를 발행하는 {@code Mono}입니다.
      */
     private Mono<TokenResult> createAndSaveRefreshToken(Authentication authentication, Long runnerId) {
         Mono<String> accessTokenMono = Mono.fromCallable(() -> jwtTokenProviderPort.generateAccessToken(authentication))
