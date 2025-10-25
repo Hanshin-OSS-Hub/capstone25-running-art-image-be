@@ -1,6 +1,6 @@
 package com.aetheri.infrastructure.persistence.entity;
 
-import com.aetheri.application.dto.image.ImageMetadataResponse;
+import com.aetheri.application.result.imagemetadata.ImageMetadataResult;
 import com.aetheri.domain.enums.image.Proficiency;
 import com.aetheri.domain.enums.image.Shape;
 import lombok.Builder;
@@ -133,12 +133,13 @@ public class ImageMetadata {
     }
 
     /**
-     * 현재 {@code ImageMetadata} 엔티티를 클라이언트에 응답하기 위한 {@link ImageMetadataResponse} DTO로 변환합니다.
+     * 현재 {@code ImageMetadata} 엔티티를 클라이언트에 응답하기 위한 {@link ImageMetadataResult} DTO로 변환합니다.
      *
      * @return 변환된 {@code ImageMetadataResponse} DTO입니다.
      */
-    public ImageMetadataResponse toResponse(){
-        return ImageMetadataResponse.builder()
+    public ImageMetadataResult toResult(){
+        return ImageMetadataResult.builder()
+                .runnerId(runnerId)
                 .title(title)
                 .description(description)
                 .location(location)
