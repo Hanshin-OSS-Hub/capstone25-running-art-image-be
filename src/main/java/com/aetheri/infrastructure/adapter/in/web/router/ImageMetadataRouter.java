@@ -1,8 +1,8 @@
 package com.aetheri.infrastructure.adapter.in.web.router;
 
-import com.aetheri.application.result.imagemetadata.ImageMetadataResult;
 import com.aetheri.infrastructure.adapter.in.web.dto.in.ImageMetadataSaveRequest;
 import com.aetheri.infrastructure.adapter.in.web.dto.in.ImageMetadataUpdateRequest;
+import com.aetheri.infrastructure.adapter.in.web.dto.out.ImageMetadataResponse;
 import com.aetheri.infrastructure.adapter.in.web.handler.ImageMetadataHandler;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -58,7 +58,7 @@ public class ImageMetadataRouter {
                                     @ApiResponse(
                                             responseCode = "200",
                                             description = "정상적으로 이미지 메타데이터를 반환합니다.",
-                                            content = @Content(schema = @Schema(implementation = ImageMetadataResult.class))
+                                            content = @Content(schema = @Schema(implementation = ImageMetadataResponse.class))
                                     ),
                                     @ApiResponse(
                                             responseCode = "404",
