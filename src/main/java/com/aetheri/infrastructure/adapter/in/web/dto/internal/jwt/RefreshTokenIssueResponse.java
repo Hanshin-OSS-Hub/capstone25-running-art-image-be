@@ -1,6 +1,7 @@
-package com.aetheri.infrastructure.adapter.in.web.dto.out.jwt;
+package com.aetheri.infrastructure.adapter.in.web.dto.internal.jwt;
 
 import com.aetheri.application.result.jwt.RefreshTokenIssueResult;
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.AccessLevel;
 import lombok.Builder;
 
@@ -19,6 +20,7 @@ import java.time.Instant;
  * @param issuedAt 토큰이 발급된 시간(UTC 기준)을 나타내는 {@code Instant} 값입니다.
  * @see RefreshTokenIssueResult
  */
+@Hidden
 @Builder(access = AccessLevel.PRIVATE)
 public record RefreshTokenIssueResponse(
         String refreshToken,

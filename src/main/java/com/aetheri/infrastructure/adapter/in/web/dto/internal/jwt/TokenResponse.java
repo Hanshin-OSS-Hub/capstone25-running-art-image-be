@@ -1,6 +1,7 @@
-package com.aetheri.infrastructure.adapter.in.web.dto.out.jwt;
+package com.aetheri.infrastructure.adapter.in.web.dto.internal.jwt;
 
 import com.aetheri.application.result.jwt.TokenResult;
+import io.swagger.v3.oas.annotations.Hidden;
 
 /**
  * 서버 내부에서 사용되는 토큰 응답 레코드입니다.
@@ -14,6 +15,7 @@ import com.aetheri.application.result.jwt.TokenResult;
  * @param refreshTokenIssueResponse 새로 발급된 리프레시 토큰에 대한 상세 응답 정보 레코드입니다.
  * @see com.aetheri.application.result.jwt.TokenResult
  */
+@Hidden
 public record TokenResponse(
         String accessToken,
         RefreshTokenIssueResponse refreshTokenIssueResponse
