@@ -149,7 +149,7 @@ public class SignInService implements SignInUseCase {
                             .map(Optional::get)
                             .filter(s -> !s.isBlank())
                             .orElseGet(() -> {
-                                var acc = userInfo.kakaoAccount();
+                                var acc = userInfo.kakaoAccountResult();
                                 var profile = (acc != null) ? acc.profile() : null;
                                 var nick = (profile != null) ? profile.nickName() : null;
                                 return (nick != null && !nick.isBlank()) ? nick : ("runner-" + userInfo.id());

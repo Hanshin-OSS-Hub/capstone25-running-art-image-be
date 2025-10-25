@@ -1,13 +1,12 @@
 package com.aetheri.application.port.out.token;
 
-import com.aetheri.infrastructure.adapter.out.redis.RedisRefreshTokenAdapter;
 import reactor.core.publisher.Mono;
 
 /**
  * Redis 저장소를 통해 리프레시 토큰(Refresh Token)의 관리(저장, 조회, 삭제)를 담당하는 아웃고잉 포트(Port)입니다.
  * 이 포트는 고성능의 토큰 처리를 위해 Redis를 활용하는 외부 통신 구현체에 대한 추상화를 제공합니다.
  *
- * @see RedisRefreshTokenAdapter 실제 Redis 기반 토큰 관리 구현체(어댑터)의 예시입니다.
+ * @see com.aetheri.infrastructure.adapter.out.redis.RedisRefreshTokenAdapter 실제 Redis 기반 토큰 관리 구현체(어댑터)의 예시입니다.
  */
 public interface RedisRefreshTokenRepositoryPort {
 
